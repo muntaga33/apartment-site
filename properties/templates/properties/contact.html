@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Muntaga’s Property Hub</title>
+</head>
+<body style="font-family: Arial; background:#f4f4f4; margin:0;">
+
+    <div style="background:#163d5c; color:white; padding:15px 30px; display:flex; justify-content:space-between;">
+        <div style="font-size:24px; font-weight:bold;">Muntaga’s Property Hub</div>
+        <div>
+            <a href="/" style="color:white; margin-left:20px;">Home</a>
+            <a href="/about/" style="color:white; margin-left:20px;">About</a>
+        </div>
+    </div>
+
+    <div style="padding:30px; text-align:center; background:#1f4e79; color:white;">
+        <h1>Contact Us</h1>
+    </div>
+
+    <div style="width:90%; max-width:600px; margin:30px auto; background:white; padding:20px; border-radius:10px;">
+
+        {% if success %}
+            <p style="color:green;">Thank you {{ name }}</p>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <input name="name" placeholder="Name" style="width:100%; padding:10px; margin-bottom:10px;">
+            <textarea name="message" placeholder="Message" style="width:100%; padding:10px;"></textarea>
+            <button style="margin-top:10px; padding:10px;">Send</button>
+        </form>
+
+    </div>
+
+</body>
+</html>

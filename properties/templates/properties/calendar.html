@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking Calendar | Muntaga’s Property Hub</title>
+</head>
+<body style="font-family: Arial, sans-serif; background:#f4f4f4; margin:0;">
+
+    <div style="background-color:#163d5c; color:white; padding:15px 30px; display:flex; justify-content:space-between; flex-wrap:wrap;">
+        <div style="font-size:24px; font-weight:bold;">Muntaga’s Property Hub</div>
+        <div>
+            <a href="/" style="color:white; text-decoration:none; margin-left:20px;">Home</a>
+            <a href="/about/" style="color:white; text-decoration:none; margin-left:20px;">About</a>
+            <a href="/contact/" style="color:white; text-decoration:none; margin-left:20px;">Contact</a>
+            <a href="/calendar/" style="color:white; text-decoration:none; margin-left:20px;">Calendar</a>
+        </div>
+    </div>
+
+    <div style="background:#1f4e79; color:white; padding:30px; text-align:center;">
+        <h1 style="margin:0;">Booking Calendar</h1>
+        <p style="margin-top:10px;">All booking requests in one place</p>
+    </div>
+
+    <div style="width:95%; max-width:1100px; margin:30px auto; background:white; padding:20px; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1); overflow-x:auto;">
+
+        <table style="width:100%; border-collapse:collapse;">
+            <thead>
+                <tr style="background:#163d5c; color:white;">
+                    <th style="padding:12px; text-align:left;">Apartment</th>
+                    <th style="padding:12px; text-align:left;">Guest</th>
+                    <th style="padding:12px; text-align:left;">Check-in</th>
+                    <th style="padding:12px; text-align:left;">Check-out</th>
+                    <th style="padding:12px; text-align:left;">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                    <tr style="border-bottom:1px solid #ddd;">
+                        <td style="padding:12px;">{{ booking.apartment.title }}</td>
+                        <td style="padding:12px;">{{ booking.name }}</td>
+                        <td style="padding:12px;">{{ booking.check_in }}</td>
+                        <td style="padding:12px;">{{ booking.check_out }}</td>
+                        <td style="padding:12px;">
+                            {% if booking.status == 'confirmed' %}
+                                <span style="color:green; font-weight:bold;">Confirmed</span>
+                            {% elif booking.status == 'cancelled' %}
+                                <span style="color:red; font-weight:bold;">Cancelled</span>
+                            {% else %}
+                                <span style="color:orange; font-weight:bold;">Pending</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5" style="padding:20px; text-align:center;">No bookings yet.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+</body>
+</html>
