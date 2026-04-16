@@ -24,8 +24,9 @@ def remove_admin(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("properties", "0012_apartmentimage"),
-    ]
+    ("auth", "0012_alter_user_first_name_max_length"),
+    ("properties", "0012_apartmentimage"),
+]
 
     operations = [
         migrations.RunPython(create_admin, remove_admin),
