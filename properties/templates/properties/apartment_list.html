@@ -1,142 +1,430 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Muntaga’s Property Hub</title>
-</head>
-<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; color: #222;">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muntaga's Property Hub</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    <!-- Navbar -->
-    <div style="background-color: #163d5c; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-        <div style="font-size: 24px; font-weight: bold;">Muntaga’s Property Hub</div>
-        <div>
-            <a href="/" style="color: white; text-decoration: none; margin-left: 20px;">Home</a>
-            <a href="/about/" style="color: white; text-decoration: none; margin-left: 20px;">About</a>
-            <a href="/contact/" style="color: white; text-decoration: none; margin-left: 20px;">Contact</a>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .navbar {
+            background: #0f172a;
+            color: white;
+            padding: 18px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+        }
+
+        .brand {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            font-size: 15px;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            color: white;
+            padding: 72px 20px 56px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            margin: 0 0 14px;
+            font-size: 40px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            margin: 0 auto;
+            max-width: 760px;
+            font-size: 18px;
+            color: #dbeafe;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1150px;
+            margin: 0 auto;
+        }
+
+        .filter-box {
+            margin: -24px auto 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.10);
+        }
+
+        .filter-form {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr 1fr auto auto auto;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .filter-form input[type="text"],
+        .filter-form input[type="number"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        .checkbox-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #334155;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 18px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .reset-link {
+            color: #2563eb;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .trust-strip {
+            background: white;
+            padding: 18px 20px;
+            border-radius: 14px;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.07);
+            margin-bottom: 34px;
+            text-align: center;
+            color: #334155;
+        }
+
+        .section {
+            margin: 36px 0;
+        }
+
+        .section h2 {
+            margin: 0 0 18px;
+            font-size: 30px;
+            color: #0f172a;
+        }
+
+        .section-subtext {
+            margin: -6px 0 22px;
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        .grid-featured {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 22px;
+        }
+
+        .grid-all {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
+        }
+
+        .property-card {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 36px rgba(15, 23, 42, 0.14);
+        }
+
+        .property-image {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            background: #e2e8f0;
+            display: block;
+        }
+
+        .property-body {
+            padding: 18px;
+        }
+
+        .property-title {
+            margin: 0 0 10px;
+            font-size: 22px;
+            line-height: 1.3;
+        }
+
+        .property-title a {
+            color: #1e3a8a;
+        }
+
+        .property-title a:hover {
+            color: #2563eb;
+        }
+
+        .property-price {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2563eb;
+            margin: 0 0 10px;
+        }
+
+        .property-meta,
+        .property-location {
+            margin: 0 0 8px;
+            color: #475569;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .property-status {
+            margin: 14px 0 0;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .available {
+            color: #15803d;
+        }
+
+        .not-available {
+            color: #dc2626;
+        }
+
+        .empty-box {
+            background: white;
+            border-radius: 16px;
+            padding: 32px 24px;
+            box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
+            color: #64748b;
+            text-align: center;
+        }
+
+        .footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 26px 20px;
+            margin-top: 48px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 960px) {
+            .filter-form {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .navbar {
+                padding: 16px 20px;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .nav-links {
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .filter-form {
+                grid-template-columns: 1fr;
+            }
+
+            .section h2 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="brand">Muntaga’s Property Hub</div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/about/">About</a>
+            <a href="/contact/">Contact</a>
         </div>
     </div>
 
-    <!-- Hero -->
-    <div style="background-color: #1f4e79; color: white; padding: 50px 20px; text-align: center;">
-        <h1 style="margin: 0; font-size: 36px;">Find Quality Apartments in Senegambia and Beyond</h1>
-        <p style="margin-top: 12px; font-size: 18px;">
+    <div class="hero">
+        <h1>Find Quality Apartments in Senegambia and Beyond</h1>
+        <p>
             Browse available properties, compare options, and contact directly for fast response.
         </p>
     </div>
 
-    <!-- Search / Filter -->
-    <div style="width: 90%; max-width: 1100px; margin: 30px auto;">
-        <form method="get" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+    <div class="container">
+        <div class="filter-box">
+            <form method="get" class="filter-form">
+                <input type="text" name="q" placeholder="Location" value="{{ query }}">
 
-            <input type="text" name="q" placeholder="Location"
-                value="{{ query }}"
-                style="padding:10px; flex:1; min-width:160px; border:1px solid #ccc; border-radius:5px;">
+                <input type="number" name="min" placeholder="Min Price" value="{{ min_price }}">
 
-            <input type="number" name="min" placeholder="Min Price"
-                value="{{ min_price }}"
-                style="padding:10px; width:140px; border:1px solid #ccc; border-radius:5px;">
+                <input type="number" name="max" placeholder="Max Price" value="{{ max_price }}">
 
-            <input type="number" name="max" placeholder="Max Price"
-                value="{{ max_price }}"
-                style="padding:10px; width:140px; border:1px solid #ccc; border-radius:5px;">
+                <label class="checkbox-wrap">
+                    <input type="checkbox" name="available" value="yes" {% if available_only == 'yes' %}checked{% endif %}>
+                    Available only
+                </label>
 
-            <label>
-                <input type="checkbox" name="available" value="yes"
-                    {% if available_only == 'yes' %}checked{% endif %}>
-                Available only
-            </label>
+                <button type="submit" class="btn btn-primary">Filter</button>
 
-            <button type="submit" style="padding:10px 18px; background:#1f4e79; color:white; border:none; border-radius:5px;">
-                Filter
-            </button>
+                <a href="/" class="reset-link">Reset</a>
+            </form>
+        </div>
 
-            <a href="/" style="text-decoration:none; color:#1f4e79;">Reset</a>
-        </form>
-    </div>
-
-    <!-- Trust Strip -->
-    <div style="width: 90%; max-width: 1100px; margin: 0 auto 30px auto; background: white; padding: 18px 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-        <p style="margin: 0; text-align: center; font-size: 15px;">
+        <div class="trust-strip">
             <strong>Direct property inquiries.</strong> Fast response. Clear pricing. Convenient locations.
-        </p>
-    </div>
+        </div>
 
-    <!-- Featured -->
-    <div style="width: 90%; max-width: 1100px; margin: 30px auto;">
-        <h2 style="margin-bottom: 15px;">Featured Properties</h2>
+        <div class="section">
+            <h2>Featured Properties</h2>
+            <p class="section-subtext">Highlighted listings selected for visibility and convenience.</p>
 
-        <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+            <div class="grid-featured">
+                {% for apartment in featured %}
+                    <div class="property-card">
+                        {% if apartment.image %}
+                            <img src="{{ apartment.image.url }}" alt="{{ apartment.title }}" class="property-image">
+                        {% else %}
+                            <div class="property-image"></div>
+                        {% endif %}
 
-            {% for apartment in featured %}
-                <div style="background: white; padding: 15px; width: 48%; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.12); box-sizing: border-box;">
+                        <div class="property-body">
+                            <h3 class="property-title">
+                                <a href="{% url 'apartment_detail' apartment.id %}">
+                                    {{ apartment.title }}
+                                </a>
+                            </h3>
 
-                    <h3 style="margin-top: 0;">
-                        <a href="{% url 'apartment_detail' apartment.id %}" style="text-decoration:none; color:#1f4e79;">
-                            {{ apartment.title }}
-                        </a>
-                    </h3>
+                            <p class="property-price">{{ apartment.price }} {{ apartment.currency }} / {{ apartment.price_type }}</p>
+                            <p class="property-location">{{ apartment.location }}</p>
+                            <p class="property-meta">
+                                {{ apartment.bedrooms }} bed | {{ apartment.get_property_type_display }} | {{ apartment.get_furnishing_display }}
+                            </p>
 
-                    {% if apartment.image %}
-                        <img src="{{ apartment.image.url }}"
-                             style="width:100%; height:250px; object-fit:cover; border-radius:8px; margin-bottom:10px;">
-                    {% endif %}
+                            {% if apartment.available %}
+                                <p class="property-status available">Available</p>
+                            {% else %}
+                                <p class="property-status not-available">Not Available</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="empty-box">
+                        No featured properties selected yet.
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
 
-                    <p><strong>{{ apartment.price }} {{ apartment.currency }}</strong> / {{ apartment.price_type }}</p>
-                    <p>{{ apartment.location }}</p>
-                    <p>{{ apartment.bedrooms }} bed | {{ apartment.get_property_type_display }} | {{ apartment.get_furnishing_display }}</p>
+        <div class="section">
+            <h2>All Properties</h2>
+            <p class="section-subtext">Explore the full available portfolio of listings.</p>
 
-                    {% if apartment.available %}
-                        <p style="color:green; font-weight:bold;">Available</p>
-                    {% else %}
-                        <p style="color:red; font-weight:bold;">Not Available</p>
-                    {% endif %}
-                </div>
-            {% empty %}
-                <p>No featured properties selected yet.</p>
-            {% endfor %}
+            <div class="grid-all">
+                {% for apartment in apartments %}
+                    <div class="property-card">
+                        {% if apartment.image %}
+                            <img src="{{ apartment.image.url }}" alt="{{ apartment.title }}" class="property-image">
+                        {% else %}
+                            <div class="property-image"></div>
+                        {% endif %}
 
+                        <div class="property-body">
+                            <h3 class="property-title">
+                                <a href="{% url 'apartment_detail' apartment.id %}">
+                                    {{ apartment.title }}
+                                </a>
+                            </h3>
+
+                            <p class="property-price">{{ apartment.price }} {{ apartment.currency }} / {{ apartment.price_type }}</p>
+                            <p class="property-location">{{ apartment.location }}</p>
+                            <p class="property-meta">
+                                {{ apartment.bedrooms }} bed | {{ apartment.get_property_type_display }}
+                            </p>
+
+                            {% if apartment.available %}
+                                <p class="property-status available">Available</p>
+                            {% else %}
+                                <p class="property-status not-available">Not Available</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="empty-box">
+                        No properties found.
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 
-    <!-- All Properties -->
-    <div style="width: 90%; max-width: 1100px; margin: 30px auto;">
-        <h2 style="margin-bottom: 15px;">All Properties</h2>
-
-        <div style="display: flex; flex-wrap: wrap; gap: 20px;">
-
-            {% for apartment in apartments %}
-                <div style="background: white; padding: 15px; width: 30%; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.12); box-sizing: border-box;">
-
-                    <h3 style="margin-top: 0;">
-                        <a href="{% url 'apartment_detail' apartment.id %}" style="text-decoration:none; color:#1f4e79;">
-                            {{ apartment.title }}
-                        </a>
-                    </h3>
-
-                    {% if apartment.image %}
-                        <img src="{{ apartment.image.url }}"
-                             style="width:100%; height:200px; object-fit:cover; border-radius:8px; margin-bottom:10px;">
-                    {% endif %}
-
-                    <p><strong>{{ apartment.price }} {{ apartment.currency }}</strong> / {{ apartment.price_type }}</p>
-                    <p>{{ apartment.location }}</p>
-                    <p>{{ apartment.bedrooms }} bed | {{ apartment.get_property_type_display }}</p>
-
-                    {% if apartment.available %}
-                        <p style="color:green; font-weight:bold;">Available</p>
-                    {% else %}
-                        <p style="color:red; font-weight:bold;">Not Available</p>
-                    {% endif %}
-                </div>
-            {% empty %}
-                <p>No properties found.</p>
-            {% endfor %}
-
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <div style="background-color: #163d5c; color: white; text-align: center; padding: 22px; margin-top: 40px;">
-        <p style="margin: 0;">Muntaga’s Property Hub | Senegambia, The Gambia | Direct property inquiries</p>
+    <div class="footer">
+        Muntaga’s Property Hub | Senegambia, The Gambia | Direct property inquiries
     </div>
 
 </body>
