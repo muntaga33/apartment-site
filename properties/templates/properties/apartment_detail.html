@@ -1,180 +1,169 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Muntaga’s Property Hub</title>
+    <title>{{ apartment.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f8fafc;
+            color: #0f172a;
+        }
+
+        .navbar {
+            background: #0f172a;
+            color: white;
+            padding: 16px 30px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+        }
+
+        .property-image {
+            width: 100%;
+            max-height: 480px;
+            object-fit: cover;
+            border-radius: 14px;
+            margin-bottom: 22px;
+            background: #e2e8f0;
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 34px;
+        }
+
+        .price {
+            font-size: 28px;
+            color: #2563eb;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .meta {
+            color: #475569;
+            margin: 8px 0;
+            font-size: 16px;
+        }
+
+        .description {
+            margin-top: 22px;
+            line-height: 1.7;
+            color: #334155;
+        }
+
+        .status {
+            margin-top: 16px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .available {
+            color: green;
+        }
+
+        .not-available {
+            color: red;
+        }
+
+        .buttons {
+            margin-top: 28px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 22px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #22c55e;
+            color: white;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 24px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
 </head>
-<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; color: #222;">
 
-    <div style="background-color: #163d5c; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-        <div style="font-size: 24px; font-weight: bold;">Muntaga’s Property Hub</div>
-        <div>
-            <a href="/" style="color: white; text-decoration: none; margin-left: 20px;">Home</a>
-            <a href="/about/" style="color: white; text-decoration: none; margin-left: 20px;">About</a>
-            <a href="/contact/" style="color: white; text-decoration: none; margin-left: 20px;">Contact</a>
-            <a href="/calendar/" style="color: white; text-decoration: none; margin-left: 20px;">Calendar</a>
-        </div>
+<body>
+
+    <div class="navbar">
+        Muntaga's Property Hub
     </div>
 
-    <div style="background-color: #1f4e79; color: white; padding: 40px 20px; text-align: center;">
-        <h1 style="margin: 0;">{{ apartment.title }}</h1>
-        <p style="margin-top: 10px; font-size: 17px;">Property details, location, and booking request</p>
-    </div>
-
-    <div style="width: 90%; max-width: 1100px; margin: 30px auto; display: flex; flex-wrap: wrap; gap: 25px;">
-
-        <div style="flex: 1 1 58%; min-width: 320px;">
+    <div class="container">
+        <div class="card">
 
             {% if apartment.image %}
-                <div style="background: white; padding: 15px; border-radius: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.12);">
-                    <img src="{{ apartment.image.url }}" style="width:100%; height:420px; object-fit:cover; border-radius:10px;">
+                <img src="{{ apartment.image.url }}" alt="{{ apartment.title }}" class="property-image">
+            {% else %}
+                <div class="property-image"></div>
+            {% endif %}
+
+            <h1>{{ apartment.title }}</h1>
+
+            <div class="price">
+                {{ apartment.price }} {{ apartment.currency }} / {{ apartment.price_type }}
+            </div>
+
+            <p class="meta"><strong>Location:</strong> {{ apartment.location }}</p>
+            <p class="meta"><strong>Bedrooms:</strong> {{ apartment.bedrooms }}</p>
+            <p class="meta"><strong>Property Type:</strong> {{ apartment.get_property_type_display }}</p>
+            <p class="meta"><strong>Furnishing:</strong> {{ apartment.get_furnishing_display }}</p>
+
+            {% if apartment.available %}
+                <p class="status available">Available</p>
+            {% else %}
+                <p class="status not-available">Not Available</p>
+            {% endif %}
+
+            {% if apartment.description %}
+                <div class="description">
+                    <strong>Description:</strong>
+                    <p>{{ apartment.description }}</p>
                 </div>
             {% endif %}
 
-            {% if apartment.images.all %}
-                <div style="margin-top: 15px; display:flex; flex-wrap:wrap; gap:10px;">
-                    {% for img in apartment.images.all %}
-                        <img src="{{ img.image.url }}" style="width:32%; height:120px; object-fit:cover; border-radius:8px;">
-                    {% endfor %}
-                </div>
-            {% endif %}
-
-            <div style="margin-top: 20px; background: white; padding: 22px; border-radius: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.12);">
-                <h3 style="margin-top: 0;">Description</h3>
-                <p style="line-height: 1.7; margin-bottom: 0;">{{ apartment.description }}</p>
+            <div class="buttons">
+                <a href="#" class="btn btn-primary">Book Now</a>
+                <a href="https://wa.me/2207799703" class="btn btn-secondary">WhatsApp</a>
             </div>
 
-            <div style="margin-top: 20px; background: white; padding: 22px; border-radius: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.12);">
-                <h3 style="margin-top: 0;">Availability Calendar — {{ month_name }}</h3>
-
-                <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:15px; font-size:14px;">
-                    <span><span style="display:inline-block; width:14px; height:14px; background:#e9ecef; border-radius:3px; margin-right:5px;"></span>Free</span>
-                    <span><span style="display:inline-block; width:14px; height:14px; background:#d4edda; border-radius:3px; margin-right:5px;"></span>Confirmed</span>
-                    <span><span style="display:inline-block; width:14px; height:14px; background:#fff3cd; border-radius:3px; margin-right:5px;"></span>Pending</span>
-                    <span><span style="display:inline-block; width:14px; height:14px; background:#f8d7da; border-radius:3px; margin-right:5px;"></span>Cancelled</span>
-                </div>
-
-                <div style="display:grid; grid-template-columns: repeat(7, 1fr); gap:8px;">
-                    {% for item in calendar_days %}
-                        <div style="
-                            padding:12px;
-                            text-align:center;
-                            border-radius:6px;
-                            font-weight:bold;
-                            {% if item.status == 'confirmed' %}
-                                background:#d4edda;
-                            {% elif item.status == 'pending' %}
-                                background:#fff3cd;
-                            {% elif item.status == 'cancelled' %}
-                                background:#f8d7da;
-                            {% else %}
-                                background:#e9ecef;
-                            {% endif %}
-                        ">
-                            {{ item.day }}
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-
-            <div style="margin-top: 20px; background: white; padding: 22px; border-radius: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.12);">
-                <h3 style="margin-top: 0;">Booked Dates</h3>
-
-                {% for booking in bookings %}
-                    <div style="padding: 10px 0; border-bottom: 1px solid #ddd;">
-                        <strong>{{ booking.check_in }}</strong> to <strong>{{ booking.check_out }}</strong>
-                        —
-                        {% if booking.status == 'confirmed' %}
-                            <span style="color: green; font-weight: bold;">Confirmed</span>
-                        {% elif booking.status == 'cancelled' %}
-                            <span style="color: red; font-weight: bold;">Cancelled</span>
-                        {% else %}
-                            <span style="color: orange; font-weight: bold;">Pending</span>
-                        {% endif %}
-                    </div>
-                {% empty %}
-                    <p style="margin-bottom: 0;">No bookings yet for this property.</p>
-                {% endfor %}
-            </div>
+            <a href="/" class="back-link">← Back to Listings</a>
 
         </div>
-
-        <div style="flex: 1 1 36%; min-width: 300px;">
-
-            <div style="background: white; padding: 22px; border-radius: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.12);">
-                <h2 style="margin-top: 0; margin-bottom: 10px;">{{ apartment.price }} {{ apartment.currency }}</h2>
-                <p><strong>Per:</strong> {{ apartment.price_type }}</p>
-                <p><strong>Location:</strong> {{ apartment.location }}</p>
-                <p><strong>Bedrooms:</strong> {{ apartment.bedrooms }}</p>
-                <p><strong>Type:</strong> {{ apartment.get_property_type_display }}</p>
-                <p><strong>Furnishing:</strong> {{ apartment.get_furnishing_display }}</p>
-
-                {% if apartment.available %}
-                    <p style="color: green; font-weight: bold;">Available</p>
-                {% else %}
-                    <p style="color: red; font-weight: bold;">Not Available</p>
-                {% endif %}
-
-                <div style="margin-top: 20px;">
-                    {% if apartment.map_link %}
-                        <a href="{{ apartment.map_link }}" target="_blank"
-                           style="display:block; margin-bottom:12px; padding:12px; background:#1f4e79; color:white; text-align:center; border-radius:6px; text-decoration:none; font-weight:bold;">
-                            View on Google Maps
-                        </a>
-                    {% endif %}
-
-                    <a href="https://wa.me/{{ apartment.phone }}?text=Hello%20I%20am%20interested%20in%20{{ apartment.title }}"
-                       style="display:block; padding:12px; background:green; color:white; text-align:center; border-radius:6px; text-decoration:none; font-weight:bold;">
-                        Book or Inquire on WhatsApp
-                    </a>
-                </div>
-            </div>
-
-            <div style="margin-top: 20px; background: white; padding: 22px; border-radius: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.12);">
-                <h3 style="margin-top: 0;">Request Booking</h3>
-
-                {% if error %}
-                    <p style="color:red; font-weight:bold;">{{ error }}</p>
-                {% endif %}
-
-                {% if success %}
-                    <p style="color:green; font-weight:bold;">{{ success }}</p>
-                {% endif %}
-
-                <form method="post">
-                    {% csrf_token %}
-
-                    <input name="name" placeholder="Your Name" required
-                           style="width:100%; padding:10px; margin-bottom:12px; box-sizing:border-box; border:1px solid #ccc; border-radius:6px;">
-
-                    <label style="display:block; margin-bottom:6px;">Check-in</label>
-                    <input type="date" name="check_in" required
-                           style="width:100%; padding:10px; margin-bottom:12px; box-sizing:border-box; border:1px solid #ccc; border-radius:6px;">
-
-                    <label style="display:block; margin-bottom:6px;">Check-out</label>
-                    <input type="date" name="check_out" required
-                           style="width:100%; padding:10px; margin-bottom:14px; box-sizing:border-box; border:1px solid #ccc; border-radius:6px;">
-
-                    <button style="padding:12px; background:#1f4e79; color:white; width:100%; border:none; border-radius:6px; font-weight:bold;">
-                        Send Booking Request
-                    </button>
-                </form>
-            </div>
-
-            <div style="margin-top: 20px; background: white; padding: 18px 22px; border-radius: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.12);">
-                <p style="margin: 0; font-size: 14px;">
-                    <strong>Direct listing.</strong> Fast response. Clear pricing. Serious inquiries only.
-                </p>
-            </div>
-
-        </div>
-    </div>
-
-    <div style="width: 90%; max-width: 1100px; margin: 10px auto 30px auto;">
-        <a href="/" style="text-decoration: none; color: #1f4e79; font-weight: bold;">← Back to Listings</a>
-    </div>
-
-    <div style="background-color: #163d5c; color: white; text-align: center; padding: 22px; margin-top: 20px;">
-        <p style="margin: 0;">Muntaga’s Property Hub | Senegambia, The Gambia | Direct property inquiries</p>
     </div>
 
 </body>
