@@ -1,13 +1,119 @@
 {% extends "admin/base.html" %}
+{% load static %}
 
 {% block title %}Muntaga's Property Hub Admin{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    /* Header */
+    #header {
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        color: #ffffff;
+        border-bottom: none;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    #branding h1,
+    #branding h1 a {
+        color: #ffffff !important;
+        font-weight: 700;
+        font-size: 20px;
+    }
+
+    #user-tools {
+        color: #e2e8f0;
+    }
+
+    #user-tools a {
+        color: #93c5fd;
+        text-decoration: none;
+    }
+
+    #user-tools a:hover {
+        color: #ffffff;
+    }
+
+    /* Content area */
+    #content {
+        padding: 25px;
+    }
+
+    /* Cards look */
+    .module {
+        border-radius: 12px;
+        border: none;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        overflow: hidden;
+    }
+
+    .module h2 {
+        background: #f1f5f9;
+        color: #0f172a;
+        font-weight: 600;
+        padding: 10px 15px;
+        margin: 0;
+    }
+
+    /* Buttons */
+    .button, input[type=submit], input[type=button], .submit-row input {
+        background: #2563eb;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 14px;
+        color: white;
+        font-weight: 600;
+    }
+
+    .button:hover,
+    input[type=submit]:hover {
+        background: #1d4ed8;
+    }
+
+    /* Tables */
+    table {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    thead th {
+        background: #f8fafc;
+        color: #0f172a;
+    }
+
+    tbody tr:hover {
+        background: #f1f5f9;
+    }
+
+    /* Breadcrumb */
+    .breadcrumbs {
+        background: transparent;
+        color: #64748b;
+        margin-bottom: 10px;
+    }
+
+    /* Footer */
+    #footer {
+        text-align: center;
+        padding: 20px;
+        color: #94a3b8;
+        font-size: 13px;
+    }
+</style>
+{% endblock %}
 
 {% block branding %}
 <h1 id="site-name">
     <a href="{% url 'admin:index' %}">
-        Muntaga's Property Hub Admin
+        Muntaga's Property Hub
     </a>
 </h1>
 {% endblock %}
 
 {% block nav-global %}{% endblock %}
+
+{% block footer %}
+<div id="footer">
+    Muntaga's Property Hub Admin • Built for property management
+</div>
+{% endblock %}
