@@ -1,10 +1,223 @@
-{% extends "admin/login.html" %}
+{% extends "admin/base_site.html" %}
+{% load static %}
 
-{% block branding %}
-<h1 id="site-name">
-    <a href="{% url 'admin:index' %}">Muntaga's Property Hub Admin</a>
-</h1>
-<p style="margin-top:10px; color:#666; font-size:14px;">
-    Secure access for property management
-</p>
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    body.login {
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        min-height: 100vh;
+    }
+
+    #container {
+        background: transparent;
+        border: none;
+        min-width: auto;
+    }
+
+    #header {
+        background: transparent;
+        box-shadow: none;
+        border-bottom: none;
+    }
+
+    #branding h1,
+    #branding h1 a {
+        color: #ffffff !important;
+        font-size: 28px;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    #content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 75vh;
+        padding: 30px 15px;
+    }
+
+    .login #content-main {
+        width: 100%;
+        max-width: 440px;
+        float: none;
+    }
+
+    .login-form-wrap {
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 36px 32px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    }
+
+    .login-welcome {
+        text-align: center;
+        margin-bottom: 24px;
+    }
+
+    .login-welcome h2 {
+        margin: 0 0 8px;
+        font-size: 28px;
+        color: #0f172a;
+    }
+
+    .login-welcome p {
+        margin: 0;
+        color: #64748b;
+        font-size: 14px;
+    }
+
+    .form-row {
+        margin-bottom: 18px;
+    }
+
+    .form-row label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+        color: #1e293b;
+    }
+
+    .form-row input {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid #cbd5e1;
+        border-radius: 10px;
+        font-size: 15px;
+        box-sizing: border-box;
+    }
+
+    .form-row input:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .submit-row {
+        background: transparent;
+        border: none;
+        padding: 0;
+        margin-top: 22px;
+    }
+
+    .submit-row input {
+        width: 100%;
+        background: #2563eb;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 13px 16px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .submit-row input:hover {
+        background: #1d4ed8;
+    }
+
+    .errornote {
+        border-radius: 10px;
+        border: none;
+        background: #fee2e2;
+        color: #991b1b;
+        padding: 12px 14px;
+        margin-bottom: 18px;
+    }
+
+    ul.errorlist {
+        margin: 0 0 12px 0;
+        padding: 0;
+        list-style: none;
+        color: #b91c1c;
+    }
+
+    .password-reset-link {
+        text-align: center;
+        margin-top: 18px;
+        font-size: 13px;
+    }
+
+    .password-reset-link a {
+        color: #2563eb;
+        text-decoration: none;
+    }
+
+    .footer-note {
+        text-align: center;
+        color: #cbd5e1;
+        font-size: 13px;
+        margin-top: 18px;
+    }
+
+    @media (max-width: 480px) {
+        .login-form-wrap {
+            padding: 26px 20px;
+            border-radius: 14px;
+        }
+
+        .login-welcome h2 {
+            font-size: 24px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="login-form-wrap">
+    <div class="login-welcome">
+        <h2>Welcome back</h2>
+        <p>Sign in to manage apartments, bookings, and inquiries.</p>
+    </div>
+
+    {% if form.errors and not form.non_field_errors %}
+        <p class="errornote">
+            Please correct the error below.
+        </p>
+    {% endif %}
+
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <p class="errornote">{{ error }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <div id="content-main">
+        {% if user.is_authenticated %}
+            <p class="errornote">
+                You are authenticated as {{ user.get_username }}, but are not authorized to access this page.
+            </p>
+        {% endif %}
+
+        <form action="{{ app_path }}" method="post" id="login-form">
+            {% csrf_token %}
+
+            <div class="form-row">
+                {{ form.username.label_tag }}
+                {{ form.username }}
+            </div>
+
+            <div class="form-row">
+                {{ form.password.label_tag }}
+                {{ form.password }}
+                <input type="hidden" name="next" value="{{ next }}">
+            </div>
+
+            {% url 'admin_password_reset' as password_reset_url %}
+            {% if password_reset_url %}
+            <div class="password-reset-link">
+                <a href="{{ password_reset_url }}">Forgot your password?</a>
+            </div>
+            {% endif %}
+
+            <div class="submit-row">
+                <input type="submit" value="Sign in">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="footer-note">
+    Muntaga's Property Hub Admin
+</div>
 {% endblock %}
