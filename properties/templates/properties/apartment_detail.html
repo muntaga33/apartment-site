@@ -158,7 +158,11 @@
 
             <div class="buttons">
                 <a href="#" class="btn btn-primary">Book Now</a>
-                <a href="https://wa.me/2207799703" class="btn btn-secondary">WhatsApp</a>
+
+                <!-- ✅ SMART WHATSAPP BUTTON -->
+                <a href="https://wa.me/{{ apartment.phone }}?text=Hello,%20I%E2%80%99m%20interested%20in%20{{ apartment.title|urlencode }}%20in%20{{ apartment.location|urlencode }}.%20Is%20it%20still%20available%3F" class="btn btn-secondary" target="_blank">
+                    WhatsApp
+                </a>
             </div>
 
             <a href="/" class="back-link">← Back to Listings</a>
