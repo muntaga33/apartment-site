@@ -74,13 +74,8 @@
             font-size: 16px;
         }
 
-        .available {
-            color: green;
-        }
-
-        .not-available {
-            color: red;
-        }
+        .available { color: green; }
+        .not-available { color: red; }
 
         .buttons {
             margin-top: 28px;
@@ -107,6 +102,17 @@
             color: white;
         }
 
+        .map-box {
+            margin-top: 30px;
+        }
+
+        .map-box iframe {
+            width: 100%;
+            height: 330px;
+            border: 0;
+            border-radius: 14px;
+        }
+
         .back-link {
             display: inline-block;
             margin-top: 24px;
@@ -119,56 +125,68 @@
 
 <body>
 
-    <div class="navbar">
-        Muntaga's Property Hub
-    </div>
+<div class="navbar">
+    Muntaga's Property Hub
+</div>
 
-    <div class="container">
-        <div class="card">
+<div class="container">
+    <div class="card">
 
-            {% if apartment.image %}
-                <img src="{{ apartment.image.url }}" alt="{{ apartment.title }}" class="property-image">
-            {% else %}
-                <div class="property-image"></div>
-            {% endif %}
+        {% if apartment.image %}
+            <img src="{{ apartment.image.url }}" alt="{{ apartment.title }}" class="property-image">
+        {% endif %}
 
-            <h1>{{ apartment.title }}</h1>
+        <h1>{{ apartment.title }}</h1>
 
-            <div class="price">
-                {{ apartment.price }} {{ apartment.currency }} / {{ apartment.price_type }}
-            </div>
-
-            <p class="meta"><strong>Location:</strong> {{ apartment.location }}</p>
-            <p class="meta"><strong>Bedrooms:</strong> {{ apartment.bedrooms }}</p>
-            <p class="meta"><strong>Property Type:</strong> {{ apartment.get_property_type_display }}</p>
-            <p class="meta"><strong>Furnishing:</strong> {{ apartment.get_furnishing_display }}</p>
-
-            {% if apartment.available %}
-                <p class="status available">Available</p>
-            {% else %}
-                <p class="status not-available">Not Available</p>
-            {% endif %}
-
-            {% if apartment.description %}
-                <div class="description">
-                    <strong>Description:</strong>
-                    <p>{{ apartment.description }}</p>
-                </div>
-            {% endif %}
-
-            <div class="buttons">
-                <a href="#" class="btn btn-primary">Book Now</a>
-
-                <!-- ✅ SMART WHATSAPP BUTTON -->
-                <a href="https://wa.me/{{ apartment.phone }}?text=Hello,%20I%E2%80%99m%20interested%20in%20{{ apartment.title|urlencode }}%20in%20{{ apartment.location|urlencode }}.%20Is%20it%20still%20available%3F" class="btn btn-secondary" target="_blank">
-                    WhatsApp
-                </a>
-            </div>
-
-            <a href="/" class="back-link">← Back to Listings</a>
-
+        <div class="price">
+            {{ apartment.price }} {{ apartment.currency }} / {{ apartment.price_type }}
         </div>
+
+        <p class="meta"><strong>Location:</strong> {{ apartment.location }}</p>
+        <p class="meta"><strong>Bedrooms:</strong> {{ apartment.bedrooms }}</p>
+        <p class="meta"><strong>Property Type:</strong> {{ apartment.get_property_type_display }}</p>
+        <p class="meta"><strong>Furnishing:</strong> {{ apartment.get_furnishing_display }}</p>
+
+        {% if apartment.available %}
+            <p class="status available">Available</p>
+        {% else %}
+            <p class="status not-available">Not Available</p>
+        {% endif %}
+
+        {% if apartment.description %}
+            <div class="description">
+                <strong>Description:</strong>
+                <p>{{ apartment.description }}</p>
+            </div>
+        {% endif %}
+
+        <div class="buttons">
+            <a href="https://wa.me/{{ apartment.phone }}?text=Hello,%20I%20want%20to%20book%20{{ apartment.title|urlencode }}%20in%20{{ apartment.location|urlencode }}.%20Please%20confirm%20availability."
+               class="btn btn-primary"
+               target="_blank">
+                Book Now
+            </a>
+
+            <a href="https://wa.me/{{ apartment.phone }}?text=Hello,%20I%E2%80%99m%20interested%20in%20{{ apartment.title|urlencode }}%20in%20{{ apartment.location|urlencode }}.%20Is%20it%20still%20available%3F"
+               class="btn btn-secondary"
+               target="_blank">
+                WhatsApp
+            </a>
+        </div>
+
+        <div class="map-box">
+            <h2>Location</h2>
+            <iframe
+                loading="lazy"
+                allowfullscreen
+                src="https://www.google.com/maps?q={{ apartment.location|urlencode }},%20The%20Gambia&output=embed">
+            </iframe>
+        </div>
+
+        <a href="/" class="back-link">← Back to Listings</a>
+
     </div>
+</div>
 
 </body>
 </html>
