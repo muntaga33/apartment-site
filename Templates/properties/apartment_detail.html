@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ apartment.title }}</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            background: #f5f7fa;
+        }
+
+        .header {
+            background: #0f172a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+        }
+
+        .main-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .gallery {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .gallery img {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .price {
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            background: #25D366;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>{{ apartment.title }}</h1>
+</div>
+
+<div class="container">
+
+    <!-- MAIN IMAGE -->
+    {% if apartment.image %}
+        <img src="{{ apartment.image.url }}" class="main-image">
+    {% endif %}
+
+    <!-- DETAILS -->
+    <p class="price">{{ apartment.price }} {{ apartment.currency }}</p>
+    <p>{{ apartment.location }}</p>
+    <p>{{ apartment.description }}</p>
+
+    <!-- GALLERY -->
+    <div class="gallery">
+        {% for img in apartment.images.all %}
+            <img src="{{ img.image.url }}">
+        {% endfor %}
+    </div>
+
+    <!-- WHATSAPP BUTTON -->
+    <a class="btn"
+       href="https://wa.me/{{ apartment.phone }}?text=I am interested in {{ apartment.title }}"
+       target="_blank">
+        Book on WhatsApp
+    </a>
+
+</div>
+
+</body>
+</html>
