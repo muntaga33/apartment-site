@@ -5,102 +5,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Muntaga's Property Hub</title>
+
     <style>
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #f8fafc;
+            background: #f1f5f9;
             color: #0f172a;
         }
 
-        a {
-            text-decoration: none;
-        }
+        a { text-decoration: none; }
 
         .navbar {
-            background: #0f172a;
+            background: #020617;
             color: white;
-            padding: 18px 32px;
+            padding: 18px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 12px;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+            gap: 14px;
         }
 
         .brand {
-            font-size: 24px;
-            font-weight: 700;
+            font-size: 25px;
+            font-weight: 800;
         }
 
         .nav-links {
             display: flex;
-            gap: 18px;
-            flex-wrap: wrap;
+            gap: 22px;
         }
 
         .nav-links a {
             color: #cbd5e1;
-            font-size: 15px;
+            font-weight: 600;
         }
 
-        .nav-links a:hover {
-            color: white;
-        }
+        .nav-links a:hover { color: white; }
 
         .hero {
-            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            background: linear-gradient(135deg, #020617, #1d4ed8);
             color: white;
-            padding: 72px 20px 56px;
+            padding: 80px 20px 70px;
             text-align: center;
         }
 
         .hero h1 {
-            margin: 0 0 14px;
-            font-size: 40px;
-            line-height: 1.2;
+            margin: 0 0 16px;
+            font-size: 46px;
+            line-height: 1.15;
         }
 
         .hero p {
-            margin: 0 auto;
             max-width: 760px;
+            margin: 0 auto;
             font-size: 18px;
             color: #dbeafe;
             line-height: 1.6;
         }
 
         .container {
-            width: 90%;
-            max-width: 1150px;
+            width: 92%;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
         .filter-box {
-            margin: -24px auto 30px;
+            margin: -32px auto 34px;
             background: white;
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.10);
+            padding: 22px;
+            border-radius: 20px;
+            box-shadow: 0 18px 40px rgba(15,23,42,0.16);
         }
 
         .filter-form {
             display: grid;
-            grid-template-columns: 1.3fr 1fr 1fr auto auto auto;
+            grid-template-columns: 1.4fr 1fr 1fr auto auto auto;
             gap: 12px;
             align-items: center;
         }
 
-        .filter-form input[type="text"],
-        .filter-form input[type="number"] {
+        input[type="text"],
+        input[type="number"] {
             width: 100%;
-            padding: 12px 14px;
+            padding: 13px 14px;
             border: 1px solid #cbd5e1;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 14px;
         }
 
@@ -116,10 +109,10 @@
         .btn {
             display: inline-block;
             padding: 12px 18px;
-            border-radius: 10px;
+            border-radius: 12px;
             border: none;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 14px;
         }
 
@@ -128,88 +121,95 @@
             color: white;
         }
 
-        .btn-primary:hover {
-            background: #1d4ed8;
-        }
+        .btn-primary:hover { background: #1d4ed8; }
 
         .reset-link {
             color: #2563eb;
-            font-weight: 600;
-            font-size: 14px;
+            font-weight: 700;
             text-align: center;
         }
 
         .trust-strip {
             background: white;
-            padding: 18px 20px;
-            border-radius: 14px;
-            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.07);
-            margin-bottom: 34px;
+            padding: 18px 22px;
+            border-radius: 18px;
+            box-shadow: 0 10px 26px rgba(15,23,42,0.08);
+            margin-bottom: 38px;
             text-align: center;
             color: #334155;
         }
 
         .section {
-            margin: 36px 0;
+            margin: 42px 0;
         }
 
         .section h2 {
-            margin: 0 0 18px;
-            font-size: 30px;
-            color: #0f172a;
+            margin: 0 0 8px;
+            font-size: 32px;
         }
 
         .section-subtext {
-            margin: -6px 0 22px;
+            margin: 0 0 24px;
             color: #64748b;
-            font-size: 15px;
         }
 
-        .grid-featured {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 22px;
-        }
-
+        .grid-featured,
         .grid-all {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 22px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
         }
 
         .property-card {
             background: white;
-            border-radius: 18px;
+            border-radius: 22px;
             overflow: hidden;
-            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 14px 34px rgba(15,23,42,0.10);
+            transition: 0.25s ease;
+            position: relative;
         }
 
         .property-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 36px rgba(15, 23, 42, 0.14);
+            transform: translateY(-5px);
+            box-shadow: 0 18px 46px rgba(15,23,42,0.18);
+        }
+
+        .image-wrap {
+            position: relative;
         }
 
         .property-image {
             width: 100%;
-            height: 230px;
+            height: 235px;
             object-fit: cover;
-            background: #e2e8f0;
             display: block;
+            background: #e2e8f0;
+        }
+
+        .badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: rgba(15,23,42,0.88);
+            color: white;
+            padding: 7px 11px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
         }
 
         .property-body {
-            padding: 18px;
+            padding: 20px;
         }
 
         .property-title {
             margin: 0 0 10px;
-            font-size: 22px;
+            font-size: 21px;
             line-height: 1.3;
         }
 
         .property-title a {
-            color: #1e3a8a;
+            color: #0f172a;
         }
 
         .property-title a:hover {
@@ -218,48 +218,63 @@
 
         .property-price {
             font-size: 22px;
-            font-weight: 700;
+            font-weight: 800;
             color: #2563eb;
-            margin: 0 0 10px;
+            margin: 0 0 12px;
         }
 
-        .property-meta,
-        .property-location {
+        .property-location,
+        .property-meta {
             margin: 0 0 8px;
             color: #475569;
             font-size: 14px;
             line-height: 1.5;
         }
 
+        .property-footer {
+            margin-top: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
         .property-status {
-            margin: 14px 0 0;
-            font-weight: 700;
+            font-weight: 800;
             font-size: 14px;
         }
 
-        .available {
-            color: #15803d;
+        .available { color: #15803d; }
+        .not-available { color: #dc2626; }
+
+        .view-link {
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 9px 13px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 13px;
         }
 
-        .not-available {
-            color: #dc2626;
+        .view-link:hover {
+            background: #dbeafe;
         }
 
         .empty-box {
             background: white;
-            border-radius: 16px;
-            padding: 32px 24px;
-            box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
+            border-radius: 18px;
+            padding: 34px 24px;
+            box-shadow: 0 10px 26px rgba(15,23,42,0.08);
             color: #64748b;
             text-align: center;
         }
 
         .footer {
-            background: #0f172a;
+            background: #020617;
             color: #cbd5e1;
             text-align: center;
-            padding: 26px 20px;
-            margin-top: 48px;
+            padding: 28px 20px;
+            margin-top: 55px;
             font-size: 14px;
         }
 
@@ -278,10 +293,11 @@
 
             .nav-links {
                 justify-content: center;
+                flex-wrap: wrap;
             }
 
             .hero h1 {
-                font-size: 32px;
+                font-size: 33px;
             }
 
             .hero p {
@@ -292,140 +308,144 @@
                 grid-template-columns: 1fr;
             }
 
-            .section h2 {
-                font-size: 26px;
+            .property-footer {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
     </style>
 </head>
+
 <body>
 
-    <div class="navbar">
-        <div class="brand">Muntaga’s Property Hub</div>
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/about/">About</a>
-            <a href="/contact/">Contact</a>
-        </div>
+<div class="navbar">
+    <div class="brand">Muntaga’s Property Hub</div>
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+    </div>
+</div>
+
+<div class="hero">
+    <h1>Quality Apartments in Senegambia and Beyond</h1>
+    <p>Browse clean, furnished and well-located properties with direct inquiry and fast response.</p>
+</div>
+
+<div class="container">
+
+    <div class="filter-box">
+        <form method="get" class="filter-form">
+            <input type="text" name="q" placeholder="Search by location" value="{{ query }}">
+            <input type="number" name="min" placeholder="Min price" value="{{ min_price }}">
+            <input type="number" name="max" placeholder="Max price" value="{{ max_price }}">
+
+            <label class="checkbox-wrap">
+                <input type="checkbox" name="available" value="yes" {% if available_only == 'yes' %}checked{% endif %}>
+                Available only
+            </label>
+
+            <button type="submit" class="btn btn-primary">Filter</button>
+            <a href="/" class="reset-link">Reset</a>
+        </form>
     </div>
 
-    <div class="hero">
-        <h1>Find Quality Apartments in Senegambia and Beyond</h1>
-        <p>
-            Browse available properties, compare options, and contact directly for fast response.
-        </p>
+    <div class="trust-strip">
+        <strong>Direct property inquiries.</strong> Clear pricing, convenient locations, and fast WhatsApp response.
     </div>
 
-    <div class="container">
-        <div class="filter-box">
-            <form method="get" class="filter-form">
-                <input type="text" name="q" placeholder="Location" value="{{ query }}">
+    <div class="section">
+        <h2>Featured Properties</h2>
+        <p class="section-subtext">Highlighted listings selected for visibility, comfort and convenience.</p>
 
-                <input type="number" name="min" placeholder="Min Price" value="{{ min_price }}">
-
-                <input type="number" name="max" placeholder="Max Price" value="{{ max_price }}">
-
-                <label class="checkbox-wrap">
-                    <input type="checkbox" name="available" value="yes" {% if available_only == 'yes' %}checked{% endif %}>
-                    Available only
-                </label>
-
-                <button type="submit" class="btn btn-primary">Filter</button>
-
-                <a href="/" class="reset-link">Reset</a>
-            </form>
-        </div>
-
-        <div class="trust-strip">
-            <strong>Direct property inquiries.</strong> Fast response. Clear pricing. Convenient locations.
-        </div>
-
-        <div class="section">
-            <h2>Featured Properties</h2>
-            <p class="section-subtext">Highlighted listings selected for visibility and convenience.</p>
-
-            <div class="grid-featured">
-                {% for apartment in featured %}
-                    <div class="property-card">
+        <div class="grid-featured">
+            {% for apartment in featured %}
+                <div class="property-card">
+                    <div class="image-wrap">
                         {% if apartment.image %}
                             <img src="{{ apartment.image.url }}" alt="{{ apartment.title }}" class="property-image">
                         {% else %}
                             <div class="property-image"></div>
                         {% endif %}
+                        <div class="badge">Featured</div>
+                    </div>
 
-                        <div class="property-body">
-                            <h3 class="property-title">
-                                <a href="{% url 'apartment_detail' apartment.id %}">
-                                    {{ apartment.title }}
-                                </a>
-                            </h3>
+                    <div class="property-body">
+                        <h3 class="property-title">
+                            <a href="{% url 'apartment_detail' apartment.id %}">{{ apartment.title }}</a>
+                        </h3>
 
-                            <p class="property-price">{{ apartment.price }} {{ apartment.currency }} / {{ apartment.price_type }}</p>
-                            <p class="property-location">{{ apartment.location }}</p>
-                            <p class="property-meta">
-                                {{ apartment.bedrooms }} bed | {{ apartment.get_property_type_display }} | {{ apartment.get_furnishing_display }}
-                            </p>
+                        <p class="property-price">{{ apartment.price }} {{ apartment.currency }} / {{ apartment.price_type }}</p>
+                        <p class="property-location">📍 {{ apartment.location }}</p>
+                        <p class="property-meta">
+                            {{ apartment.bedrooms }} bed · {{ apartment.get_property_type_display }} · {{ apartment.get_furnishing_display }}
+                        </p>
 
+                        <div class="property-footer">
                             {% if apartment.available %}
-                                <p class="property-status available">Available</p>
+                                <span class="property-status available">Available</span>
                             {% else %}
-                                <p class="property-status not-available">Not Available</p>
+                                <span class="property-status not-available">Not Available</span>
                             {% endif %}
+
+                            <a href="{% url 'apartment_detail' apartment.id %}" class="view-link">View Details</a>
                         </div>
                     </div>
-                {% empty %}
-                    <div class="empty-box">
-                        No featured properties selected yet.
-                    </div>
-                {% endfor %}
-            </div>
+                </div>
+            {% empty %}
+                <div class="empty-box">No featured properties selected yet.</div>
+            {% endfor %}
         </div>
+    </div>
 
-        <div class="section">
-            <h2>All Properties</h2>
-            <p class="section-subtext">Explore the full available portfolio of listings.</p>
+    <div class="section">
+        <h2>All Properties</h2>
+        <p class="section-subtext">Explore the full portfolio of available listings.</p>
 
-            <div class="grid-all">
-                {% for apartment in apartments %}
-                    <div class="property-card">
+        <div class="grid-all">
+            {% for apartment in apartments %}
+                <div class="property-card">
+                    <div class="image-wrap">
                         {% if apartment.image %}
                             <img src="{{ apartment.image.url }}" alt="{{ apartment.title }}" class="property-image">
                         {% else %}
                             <div class="property-image"></div>
                         {% endif %}
+                    </div>
 
-                        <div class="property-body">
-                            <h3 class="property-title">
-                                <a href="{% url 'apartment_detail' apartment.id %}">
-                                    {{ apartment.title }}
-                                </a>
-                            </h3>
+                    <div class="property-body">
+                        <h3 class="property-title">
+                            <a href="{% url 'apartment_detail' apartment.id %}">{{ apartment.title }}</a>
+                        </h3>
 
-                            <p class="property-price">{{ apartment.price }} {{ apartment.currency }} / {{ apartment.price_type }}</p>
-                            <p class="property-location">{{ apartment.location }}</p>
-                            <p class="property-meta">
-                                {{ apartment.bedrooms }} bed | {{ apartment.get_property_type_display }}
-                            </p>
+                        <p class="property-price">{{ apartment.price }} {{ apartment.currency }} / {{ apartment.price_type }}</p>
+                        <p class="property-location">📍 {{ apartment.location }}</p>
+                        <p class="property-meta">
+                            {{ apartment.bedrooms }} bed · {{ apartment.get_property_type_display }}
+                        </p>
 
+                        <div class="property-footer">
                             {% if apartment.available %}
-                                <p class="property-status available">Available</p>
+                                <span class="property-status available">Available</span>
                             {% else %}
-                                <p class="property-status not-available">Not Available</p>
+                                <span class="property-status not-available">Not Available</span>
                             {% endif %}
+
+                            <a href="{% url 'apartment_detail' apartment.id %}" class="view-link">View Details</a>
                         </div>
                     </div>
-                {% empty %}
-                    <div class="empty-box">
-                        No properties found.
-                    </div>
-                {% endfor %}
-            </div>
+                </div>
+            {% empty %}
+                <div class="empty-box">No properties found.</div>
+            {% endfor %}
         </div>
     </div>
 
-    <div class="footer">
-        Muntaga’s Property Hub | Senegambia, The Gambia | Direct property inquiries
-    </div>
+</div>
+
+<div class="footer">
+    Muntaga’s Property Hub | Senegambia, The Gambia | Direct property inquiries
+</div>
 
 </body>
 </html>
