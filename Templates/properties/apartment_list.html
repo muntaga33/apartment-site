@@ -6,64 +6,90 @@
 
     <style>
         body {
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             margin: 0;
             background: #f5f7fa;
+            color: #0f172a;
         }
 
         .header {
             background: #0f172a;
             color: white;
-            padding: 20px;
+            padding: 24px;
             text-align: center;
         }
 
         .container {
             width: 90%;
+            max-width: 1150px;
             margin: auto;
         }
 
         h2 {
             margin-top: 40px;
+            font-size: 28px;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
         }
 
         .card {
             background: white;
-            border-radius: 10px;
+            border-radius: 14px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.10);
         }
 
         .card img {
             width: 100%;
-            height: 180px;
+            height: 210px;
             object-fit: cover;
-            background: #ddd;
+            background: #e5e7eb;
+            display: block;
         }
 
         .card-body {
-            padding: 15px;
+            padding: 16px;
+        }
+
+        .card-body h3 {
+            margin: 0 0 10px;
+            font-size: 20px;
         }
 
         .price {
             color: #2563eb;
             font-weight: bold;
+            font-size: 18px;
+        }
+
+        .location {
+            color: #475569;
         }
 
         .btn {
             display: inline-block;
-            padding: 8px 12px;
+            padding: 9px 14px;
             background: #2563eb;
             color: white;
-            border-radius: 5px;
+            border-radius: 7px;
             text-decoration: none;
             margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .empty {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            color: #64748b;
         }
     </style>
 </head>
@@ -72,6 +98,7 @@
 
 <div class="header">
     <h1>Muntaga’s Property Hub</h1>
+    <p>Quality apartments in Senegambia and beyond</p>
 </div>
 
 <div class="container">
@@ -82,19 +109,21 @@
         {% for apartment in featured %}
         <div class="card">
             {% if apartment.image %}
-                <img src="{{ apartment.image.url }}">
+                <img src="{{ apartment.image.url }}" alt="{{ apartment.title }}">
+            {% else %}
+                <img src="https://via.placeholder.com/500x300?text=No+Image" alt="No image">
             {% endif %}
 
             <div class="card-body">
                 <h3>{{ apartment.title }}</h3>
-                <p class="price">{{ apartment.price }} GMD</p>
-                <p>{{ apartment.location }}</p>
+                <p class="price">{{ apartment.price }} {{ apartment.currency }} / {{ apartment.price_type }}</p>
+                <p class="location">{{ apartment.location }}</p>
 
-                <a href="{% url 'apartment_detail' apartment.id %}" class="btn">
-                    View
-                </a>
+                <a href="{% url 'apartment_detail' apartment.id %}" class="btn">View Details</a>
             </div>
         </div>
+        {% empty %}
+        <div class="empty">No featured properties yet.</div>
         {% endfor %}
     </div>
 
@@ -104,19 +133,21 @@
         {% for apartment in apartments %}
         <div class="card">
             {% if apartment.image %}
-                <img src="{{ apartment.image.url }}">
+                <img src="{{ apartment.image.url }}" alt="{{ apartment.title }}">
+            {% else %}
+                <img src="https://via.placeholder.com/500x300?text=No+Image" alt="No image">
             {% endif %}
 
             <div class="card-body">
                 <h3>{{ apartment.title }}</h3>
-                <p class="price">{{ apartment.price }} GMD</p>
-                <p>{{ apartment.location }}</p>
+                <p class="price">{{ apartment.price }} {{ apartment.currency }} / {{ apartment.price_type }}</p>
+                <p class="location">{{ apartment.location }}</p>
 
-                <a href="{% url 'apartment_detail' apartment.id %}" class="btn">
-                    View
-                </a>
+                <a href="{% url 'apartment_detail' apartment.id %}" class="btn">View Details</a>
             </div>
         </div>
+        {% empty %}
+        <div class="empty">No properties found.</div>
         {% endfor %}
     </div>
 
