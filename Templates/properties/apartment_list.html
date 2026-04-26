@@ -6,16 +6,16 @@
 
     <style>
         body {
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             margin: 0;
             background: #f5f7fa;
+            color: #0f172a;
         }
 
-        /* NAVBAR */
         .nav {
             background: #0f172a;
             color: white;
-            padding: 15px 30px;
+            padding: 16px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -25,101 +25,126 @@
             color: white;
             margin-left: 20px;
             text-decoration: none;
+            font-size: 14px;
         }
 
-        /* HERO */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+            background: linear-gradient(rgba(15,23,42,0.75), rgba(15,23,42,0.75)),
                         url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2');
+            background-size: cover;
+            background-position: center;
             color: white;
-            padding: 60px 20px;
+            padding: 70px 20px;
             text-align: center;
         }
 
         .hero h1 {
-            margin: 0;
+            margin: 0 0 10px;
+            font-size: 34px;
         }
 
-        /* CONTAINER */
         .container {
             width: 90%;
+            max-width: 1150px;
             margin: auto;
         }
 
         h2 {
-            margin-top: 40px;
+            margin-top: 38px;
+            margin-bottom: 18px;
         }
 
-        /* GRID */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
         }
 
-        /* CARD */
         .card {
             background: white;
-            border-radius: 10px;
+            border-radius: 14px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 22px rgba(0,0,0,0.10);
             transition: 0.2s;
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
         }
 
         .card img {
             width: 100%;
-            height: 200px;
+            height: 190px;
             object-fit: cover;
-            background: #ddd;
+            display: block;
+            background: #e5e7eb;
         }
 
         .card-body {
-            padding: 15px;
+            padding: 16px;
+            min-height: 145px;
+        }
+
+        .card h3 {
+            margin: 0 0 8px;
+            font-size: 18px;
         }
 
         .price {
             color: #2563eb;
             font-weight: bold;
+            margin: 8px 0;
+        }
+
+        .location {
+            color: #475569;
+            margin: 8px 0;
         }
 
         .btn {
             display: inline-block;
-            padding: 8px 12px;
+            padding: 9px 13px;
             background: #2563eb;
             color: white;
-            border-radius: 5px;
+            border-radius: 7px;
             text-decoration: none;
             margin-top: 10px;
+            font-size: 14px;
+            font-weight: bold;
         }
 
-        /* FOOTER */
         .footer {
-            margin-top: 50px;
+            margin-top: 55px;
             background: #0f172a;
             color: white;
             text-align: center;
-            padding: 20px;
+            padding: 24px;
+        }
+
+        @media (max-width: 700px) {
+            .nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <div class="nav">
     <div><strong>Muntaga Property Hub</strong></div>
     <div>
         <a href="/">Home</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
     </div>
 </div>
 
-<!-- HERO -->
 <div class="hero">
     <h1>Find Your Perfect Apartment</h1>
     <p>Quality apartments in Senegambia and beyond</p>
@@ -127,13 +152,15 @@
 
 <div class="container">
 
-    <!-- FEATURED -->
     <h2>Featured Properties</h2>
+
     <div class="grid">
         {% for apartment in featured %}
         <div class="card">
             {% if apartment.image %}
-                <img src="{{ apartment.image.url }}">
+                <img src="{{ apartment.image.url }}" alt="{{ apartment.title }}">
+            {% else %}
+                <img src="https://via.placeholder.com/500x300?text=No+Image" alt="No image">
             {% endif %}
 
             <div class="card-body">
@@ -148,23 +175,27 @@
                     {% endif %}
                 </p>
 
-                <p>{{ apartment.location }}</p>
+                <p class="location">{{ apartment.location }}</p>
 
                 <a href="{% url 'apartment_detail' apartment.id %}" class="btn">
                     View Details
                 </a>
             </div>
         </div>
+        {% empty %}
+            <p>No featured properties yet.</p>
         {% endfor %}
     </div>
 
-    <!-- ALL -->
     <h2>All Properties</h2>
+
     <div class="grid">
         {% for apartment in apartments %}
         <div class="card">
             {% if apartment.image %}
-                <img src="{{ apartment.image.url }}">
+                <img src="{{ apartment.image.url }}" alt="{{ apartment.title }}">
+            {% else %}
+                <img src="https://via.placeholder.com/500x300?text=No+Image" alt="No image">
             {% endif %}
 
             <div class="card-body">
@@ -179,19 +210,20 @@
                     {% endif %}
                 </p>
 
-                <p>{{ apartment.location }}</p>
+                <p class="location">{{ apartment.location }}</p>
 
                 <a href="{% url 'apartment_detail' apartment.id %}" class="btn">
                     View Details
                 </a>
             </div>
         </div>
+        {% empty %}
+            <p>No properties found.</p>
         {% endfor %}
     </div>
 
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
     <p>📞 Contact: +220 7799703</p>
     <p>© Muntaga Property Hub</p>
