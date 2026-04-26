@@ -6,151 +6,195 @@
 
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Arial;
             margin: 0;
             background: #f5f7fa;
-            color: #0f172a;
         }
 
-        .header {
+        /* NAVBAR */
+        .nav {
             background: #0f172a;
             color: white;
-            padding: 24px;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                        url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2');
+            color: white;
+            padding: 60px 20px;
             text-align: center;
         }
 
+        .hero h1 {
+            margin: 0;
+        }
+
+        /* CONTAINER */
         .container {
             width: 90%;
-            max-width: 1150px;
             margin: auto;
         }
 
         h2 {
             margin-top: 40px;
-            font-size: 28px;
         }
 
+        /* GRID */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 22px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
         }
 
+        /* CARD */
         .card {
             background: white;
-            border-radius: 14px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
         }
 
         .card img {
             width: 100%;
-            height: 210px;
+            height: 200px;
             object-fit: cover;
-            background: #e5e7eb;
-            display: block;
+            background: #ddd;
         }
 
         .card-body {
-            padding: 16px;
-        }
-
-        .card-body h3 {
-            margin: 0 0 10px;
-            font-size: 20px;
+            padding: 15px;
         }
 
         .price {
             color: #2563eb;
             font-weight: bold;
-            font-size: 18px;
-        }
-
-        .location {
-            color: #475569;
         }
 
         .btn {
             display: inline-block;
-            padding: 9px 14px;
+            padding: 8px 12px;
             background: #2563eb;
             color: white;
-            border-radius: 7px;
+            border-radius: 5px;
             text-decoration: none;
             margin-top: 10px;
-            font-weight: bold;
         }
 
-        .btn:hover {
-            background: #1d4ed8;
-        }
-
-        .empty {
-            background: white;
+        /* FOOTER */
+        .footer {
+            margin-top: 50px;
+            background: #0f172a;
+            color: white;
+            text-align: center;
             padding: 20px;
-            border-radius: 12px;
-            color: #64748b;
         }
     </style>
 </head>
 
 <body>
 
-<div class="header">
-    <h1>Muntaga’s Property Hub</h1>
+<!-- NAVBAR -->
+<div class="nav">
+    <div><strong>Muntaga Property Hub</strong></div>
+    <div>
+        <a href="/">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>Find Your Perfect Apartment</h1>
     <p>Quality apartments in Senegambia and beyond</p>
 </div>
 
 <div class="container">
 
+    <!-- FEATURED -->
     <h2>Featured Properties</h2>
-
     <div class="grid">
         {% for apartment in featured %}
         <div class="card">
             {% if apartment.image %}
-                <img src="{{ apartment.image.url }}" alt="{{ apartment.title }}">
-            {% else %}
-                <img src="https://via.placeholder.com/500x300?text=No+Image" alt="No image">
+                <img src="{{ apartment.image.url }}">
             {% endif %}
 
             <div class="card-body">
                 <h3>{{ apartment.title }}</h3>
-                <p class="price">{{ apartment.price }} {{ apartment.currency }} / {{ apartment.price_type }}</p>
-                <p class="location">{{ apartment.location }}</p>
 
-                <a href="{% url 'apartment_detail' apartment.id %}" class="btn">View Details</a>
+                <p class="price">
+                    {{ apartment.price }} {{ apartment.currency }}
+                    {% if apartment.price_type == "day" %}
+                        / day
+                    {% else %}
+                        / month
+                    {% endif %}
+                </p>
+
+                <p>{{ apartment.location }}</p>
+
+                <a href="{% url 'apartment_detail' apartment.id %}" class="btn">
+                    View Details
+                </a>
             </div>
         </div>
-        {% empty %}
-        <div class="empty">No featured properties yet.</div>
         {% endfor %}
     </div>
 
+    <!-- ALL -->
     <h2>All Properties</h2>
-
     <div class="grid">
         {% for apartment in apartments %}
         <div class="card">
             {% if apartment.image %}
-                <img src="{{ apartment.image.url }}" alt="{{ apartment.title }}">
-            {% else %}
-                <img src="https://via.placeholder.com/500x300?text=No+Image" alt="No image">
+                <img src="{{ apartment.image.url }}">
             {% endif %}
 
             <div class="card-body">
                 <h3>{{ apartment.title }}</h3>
-                <p class="price">{{ apartment.price }} {{ apartment.currency }} / {{ apartment.price_type }}</p>
-                <p class="location">{{ apartment.location }}</p>
 
-                <a href="{% url 'apartment_detail' apartment.id %}" class="btn">View Details</a>
+                <p class="price">
+                    {{ apartment.price }} {{ apartment.currency }}
+                    {% if apartment.price_type == "day" %}
+                        / day
+                    {% else %}
+                        / month
+                    {% endif %}
+                </p>
+
+                <p>{{ apartment.location }}</p>
+
+                <a href="{% url 'apartment_detail' apartment.id %}" class="btn">
+                    View Details
+                </a>
             </div>
         </div>
-        {% empty %}
-        <div class="empty">No properties found.</div>
         {% endfor %}
     </div>
 
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p>📞 Contact: +220 7799703</p>
+    <p>© Muntaga Property Hub</p>
 </div>
 
 </body>
