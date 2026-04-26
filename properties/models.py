@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 
 class Apartment(models.Model):
@@ -36,8 +37,7 @@ class Apartment(models.Model):
     location = models.CharField(max_length=200)
     map_link = models.URLField(blank=True, null=True)
 
-    # MAIN IMAGE
-    image = models.ImageField(upload_to='apartments/', blank=True, null=True)
+    image = CloudinaryField('image', blank=True, null=True)
 
     available = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
@@ -46,10 +46,9 @@ class Apartment(models.Model):
         return self.title
 
 
-# 👉 NEW: multiple images
 class ApartmentImage(models.Model):
     apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='apartments/gallery/')
+    image = CloudinaryField('gallery_image', blank=True, null=True)
 
     def __str__(self):
         return f"Image for {self.apartment.title}"
