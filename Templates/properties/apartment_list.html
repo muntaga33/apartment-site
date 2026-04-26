@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Muntaga Property Hub</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            background: #f5f7fa;
+        }
+
+        .header {
+            background: #0f172a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+        }
+
+        h2 {
+            margin-top: 40px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: #ddd;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .price {
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 12px;
+            background: #2563eb;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>Muntaga’s Property Hub</h1>
+</div>
+
+<div class="container">
+
+    <h2>Featured Properties</h2>
+
+    <div class="grid">
+        {% for apartment in featured %}
+        <div class="card">
+            {% if apartment.image %}
+                <img src="{{ apartment.image.url }}">
+            {% endif %}
+
+            <div class="card-body">
+                <h3>{{ apartment.title }}</h3>
+                <p class="price">{{ apartment.price }} GMD</p>
+                <p>{{ apartment.location }}</p>
+
+                <a href="{% url 'apartment_detail' apartment.id %}" class="btn">
+                    View
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2>All Properties</h2>
+
+    <div class="grid">
+        {% for apartment in apartments %}
+        <div class="card">
+            {% if apartment.image %}
+                <img src="{{ apartment.image.url }}">
+            {% endif %}
+
+            <div class="card-body">
+                <h3>{{ apartment.title }}</h3>
+                <p class="price">{{ apartment.price }} GMD</p>
+                <p>{{ apartment.location }}</p>
+
+                <a href="{% url 'apartment_detail' apartment.id %}" class="btn">
+                    View
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+</body>
+</html>
