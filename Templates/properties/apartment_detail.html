@@ -20,12 +20,13 @@
 
         .container {
             width: 90%;
+            max-width: 1000px;
             margin: auto;
         }
 
         .main-image {
             width: 100%;
-            max-height: 400px;
+            height: 400px;
             object-fit: cover;
             border-radius: 10px;
         }
@@ -33,31 +34,45 @@
         .gallery {
             display: flex;
             gap: 10px;
-            margin-top: 20px;
+            margin-top: 15px;
             flex-wrap: wrap;
         }
 
         .gallery img {
-            width: 150px;
-            height: 100px;
+            width: 100px;
+            height: 70px;
             object-fit: cover;
             border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .info {
+            margin-top: 20px;
         }
 
         .price {
-            color: #2563eb;
+            font-size: 24px;
             font-weight: bold;
-            font-size: 20px;
+            color: #2563eb;
+        }
+
+        .badge {
+            background: #e2e8f0;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 10px;
+            display: inline-block;
         }
 
         .btn {
             display: inline-block;
-            padding: 10px 15px;
+            padding: 12px 18px;
             background: #25D366;
             color: white;
-            border-radius: 5px;
+            border-radius: 6px;
             text-decoration: none;
-            margin-top: 15px;
+            margin-top: 20px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -72,29 +87,54 @@
 
     <!-- MAIN IMAGE -->
     {% if apartment.image %}
-        <img src="{{ apartment.image.url }}" class="main-image">
+        <img src="{{ apartment.image.url }}" class="main-image" id="mainImage">
     {% endif %}
-
-    <!-- DETAILS -->
-    <p class="price">{{ apartment.price }} {{ apartment.currency }}</p>
-    <p>{{ apartment.location }}</p>
-    <p>{{ apartment.description }}</p>
 
     <!-- GALLERY -->
     <div class="gallery">
         {% for img in apartment.images.all %}
-            <img src="{{ img.image.url }}">
+            <img src="{{ img.image.url }}" onclick="changeImage(this.src)">
         {% endfor %}
     </div>
 
-    <!-- WHATSAPP BUTTON -->
-    <a class="btn"
-       href="https://wa.me/{{ apartment.phone }}?text=I am interested in {{ apartment.title }}"
-       target="_blank">
-        Book on WhatsApp
-    </a>
+    <!-- INFO -->
+    <div class="info">
+
+        <p class="price">
+            {{ apartment.price }} {{ apartment.currency }}
+            {% if apartment.price_type == "day" %}
+                / day
+            {% else %}
+                / month
+            {% endif %}
+        </p>
+
+        <p>
+            <span class="badge">{{ apartment.property_type }}</span>
+            <span class="badge">{{ apartment.furnishing }}</span>
+            <span class="badge">{{ apartment.bedrooms }} bedroom(s)</span>
+        </p>
+
+        <p><strong>Location:</strong> {{ apartment.location }}</p>
+
+        <p>{{ apartment.description }}</p>
+
+        <!-- WHATSAPP -->
+        <a class="btn"
+           href="https://wa.me/{{ apartment.phone }}?text=Hello, I am interested in {{ apartment.title }} for {{ apartment.price }} {{ apartment.currency }}{% if apartment.price_type == 'day' %}/day{% else %}/month{% endif %}. Is it available?"
+           target="_blank">
+            Book on WhatsApp
+        </a>
+
+    </div>
 
 </div>
+
+<script>
+function changeImage(src) {
+    document.getElementById("mainImage").src = src;
+}
+</script>
 
 </body>
 </html>
