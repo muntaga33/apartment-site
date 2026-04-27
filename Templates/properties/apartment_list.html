@@ -2,232 +2,276 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Muntaga's Property Hub</title>
+<title>Muntaga Property Hub</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: #f5f7fa;
-            color: #0f172a;
-        }
+<style>
+body{
+font-family:Arial,sans-serif;
+margin:0;
+background:#f5f7fa;
+color:#0f172a;
+}
 
-        .nav {
-            background: #0f172a;
-            color: white;
-            padding: 16px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.nav{
+background:#0f172a;
+color:white;
+padding:15px 30px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+}
 
-        .nav a {
-            color: white;
-            margin-left: 20px;
-            text-decoration: none;
-            font-size: 14px;
-        }
+.nav a{
+color:white;
+text-decoration:none;
+margin-left:18px;
+font-size:14px;
+}
 
-        .hero {
-            background: linear-gradient(rgba(15,23,42,0.75), rgba(15,23,42,0.75)),
-                        url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 70px 20px;
-            text-align: center;
-        }
+.hero{
+padding:60px 20px;
+text-align:center;
+background:#1e293b;
+color:white;
+}
 
-        .hero h1 {
-            margin: 0 0 10px;
-            font-size: 34px;
-        }
+.container{
+width:92%;
+max-width:1200px;
+margin:auto;
+}
 
-        .container {
-            width: 90%;
-            max-width: 1150px;
-            margin: auto;
-        }
+.filters{
+background:white;
+padding:20px;
+border-radius:12px;
+margin-top:25px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:12px;
+}
 
-        h2 {
-            margin-top: 38px;
-            margin-bottom: 18px;
-        }
+.filters input,
+.filters select{
+padding:10px;
+border:1px solid #ccc;
+border-radius:8px;
+width:100%;
+}
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 24px;
-        }
+.filters button{
+background:#2563eb;
+color:white;
+border:none;
+padding:10px;
+border-radius:8px;
+cursor:pointer;
+}
 
-        .card {
-            background: white;
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 8px 22px rgba(0,0,0,0.10);
-            transition: 0.2s;
-        }
+h2{
+margin-top:35px;
+}
 
-        .card:hover {
-            transform: translateY(-4px);
-        }
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+gap:22px;
+}
 
-        .card img {
-            width: 100%;
-            height: 190px;
-            object-fit: cover;
-            display: block;
-            background: #e5e7eb;
-        }
+.card-link{
+text-decoration:none;
+color:inherit;
+display:block;
+}
 
-        .card-body {
-            padding: 16px;
-            min-height: 145px;
-        }
+.card{
+background:white;
+border-radius:14px;
+overflow:hidden;
+box-shadow:0 6px 18px rgba(0,0,0,0.08);
+transition:0.2s;
+}
 
-        .card h3 {
-            margin: 0 0 8px;
-            font-size: 18px;
-        }
+.card:hover{
+transform:translateY(-4px);
+}
 
-        .price {
-            color: #2563eb;
-            font-weight: bold;
-            margin: 8px 0;
-        }
+.card img{
+width:100%;
+height:190px;
+object-fit:cover;
+display:block;
+}
 
-        .location {
-            color: #475569;
-            margin: 8px 0;
-        }
+.card-body{
+padding:15px;
+}
 
-        .btn {
-            display: inline-block;
-            padding: 9px 13px;
-            background: #2563eb;
-            color: white;
-            border-radius: 7px;
-            text-decoration: none;
-            margin-top: 10px;
-            font-size: 14px;
-            font-weight: bold;
-        }
+.price{
+font-weight:bold;
+color:#2563eb;
+margin:8px 0;
+}
 
-        .footer {
-            margin-top: 55px;
-            background: #0f172a;
-            color: white;
-            text-align: center;
-            padding: 24px;
-        }
+.badge{
+display:inline-block;
+background:#e2e8f0;
+padding:4px 8px;
+border-radius:6px;
+font-size:12px;
+margin-right:6px;
+margin-top:6px;
+}
 
-        @media (max-width: 700px) {
-            .nav {
-                flex-direction: column;
-                gap: 10px;
-            }
+.footer{
+margin-top:50px;
+background:#0f172a;
+color:white;
+text-align:center;
+padding:25px;
+}
 
-            .hero h1 {
-                font-size: 28px;
-            }
-        }
-    </style>
+.float-wa{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+padding:14px 16px;
+border-radius:50%;
+text-decoration:none;
+font-size:22px;
+}
+
+@media(max-width:700px){
+.nav{
+flex-direction:column;
+gap:10px;
+}
+}
+</style>
 </head>
 
 <body>
 
 <div class="nav">
-    <div><strong>Muntaga's Property Hub</strong></div>
-    <div>
-        <a href="/">Home</a>
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-    </div>
+<div><strong>Muntaga Property Hub</strong></div>
+
+<div>
+<a href="/">Home</a>
+<a href="/about/">About</a>
+<a href="/contact/">Contact</a>
+</div>
 </div>
 
 <div class="hero">
-    <h1>Find Your Perfect Apartment</h1>
-    <p>Quality apartments in Senegambia and beyond</p>
+<h1>Find Your Perfect Apartment</h1>
+<p>Quality apartments in Senegambia and beyond</p>
 </div>
 
 <div class="container">
 
-    <h2>Featured Properties</h2>
+<form method="get" class="filters">
 
-    <div class="grid">
-        {% for apartment in featured %}
-        <div class="card">
-            {% if apartment.image %}
-                <img src="{{ apartment.image.url }}" alt="{{ apartment.title }}">
-            {% else %}
-                <img src="https://via.placeholder.com/500x300?text=No+Image" alt="No image">
-            {% endif %}
+<input type="text" name="q" placeholder="Search location" value="{{ query }}">
 
-            <div class="card-body">
-                <h3>{{ apartment.title }}</h3>
+<select name="furnished">
+<option value="">Furnishing</option>
+<option value="furnished">Furnished</option>
+<option value="unfurnished">Unfurnished</option>
+</select>
 
-                <p class="price">
-                    {{ apartment.price }} {{ apartment.currency }}
-                    {% if apartment.price_type == "day" %}
-                        / day
-                    {% else %}
-                        / month
-                    {% endif %}
-                </p>
+<input type="number" name="min" placeholder="Min Price">
 
-                <p class="location">{{ apartment.location }}</p>
+<input type="number" name="max" placeholder="Max Price">
 
-                <a href="{% url 'apartment_detail' apartment.id %}" class="btn">
-                    View Details
-                </a>
-            </div>
-        </div>
-        {% empty %}
-            <p>No featured properties yet.</p>
-        {% endfor %}
-    </div>
+<select name="available">
+<option value="">Availability</option>
+<option value="yes">Available Only</option>
+</select>
 
-    <h2>All Properties</h2>
+<button type="submit">Search</button>
 
-    <div class="grid">
-        {% for apartment in apartments %}
-        <div class="card">
-            {% if apartment.image %}
-                <img src="{{ apartment.image.url }}" alt="{{ apartment.title }}">
-            {% else %}
-                <img src="https://via.placeholder.com/500x300?text=No+Image" alt="No image">
-            {% endif %}
+</form>
 
-            <div class="card-body">
-                <h3>{{ apartment.title }}</h3>
+<h2>Featured Properties</h2>
 
-                <p class="price">
-                    {{ apartment.price }} {{ apartment.currency }}
-                    {% if apartment.price_type == "day" %}
-                        / day
-                    {% else %}
-                        / month
-                    {% endif %}
-                </p>
+<div class="grid">
+{% for apartment in featured %}
+<a href="{% url 'apartment_detail' apartment.id %}" class="card-link">
+<div class="card">
 
-                <p class="location">{{ apartment.location }}</p>
+{% if apartment.image %}
+<img src="{{ apartment.image.url }}">
+{% endif %}
 
-                <a href="{% url 'apartment_detail' apartment.id %}" class="btn">
-                    View Details
-                </a>
-            </div>
-        </div>
-        {% empty %}
-            <p>No properties found.</p>
-        {% endfor %}
-    </div>
+<div class="card-body">
+<h3>{{ apartment.title }}</h3>
+
+<p class="price">
+{{ apartment.price }} {{ apartment.currency }}
+{% if apartment.price_type == "day" %}
+ / day
+{% else %}
+ / month
+{% endif %}
+</p>
+
+<p>{{ apartment.location }}</p>
+
+<span class="badge">{{ apartment.furnishing }}</span>
+<span class="badge">{{ apartment.bedrooms }} bed</span>
+
+</div>
+</div>
+</a>
+{% endfor %}
+</div>
+
+<h2>All Properties</h2>
+
+<div class="grid">
+{% for apartment in apartments %}
+<a href="{% url 'apartment_detail' apartment.id %}" class="card-link">
+<div class="card">
+
+{% if apartment.image %}
+<img src="{{ apartment.image.url }}">
+{% endif %}
+
+<div class="card-body">
+<h3>{{ apartment.title }}</h3>
+
+<p class="price">
+{{ apartment.price }} {{ apartment.currency }}
+{% if apartment.price_type == "day" %}
+ / day
+{% else %}
+ / month
+{% endif %}
+</p>
+
+<p>{{ apartment.location }}</p>
+
+<span class="badge">{{ apartment.furnishing }}</span>
+<span class="badge">{{ apartment.bedrooms }} bed</span>
+
+</div>
+</div>
+</a>
+{% endfor %}
+</div>
 
 </div>
 
 <div class="footer">
-    <p>📞 Contact: +220 7799703</p>
-    <p>© Muntaga's Property Hub</p>
+<p>📞 Contact: +220 7799703</p>
+<p>© Muntaga Property Hub</p>
 </div>
+
+<a href="https://wa.me/2207799703" class="float-wa" target="_blank">💬</a>
 
 </body>
 </html>
