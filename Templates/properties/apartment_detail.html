@@ -3,8 +3,11 @@
 <html>
 <head>
 <title>{{ apartment.title }}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+*{box-sizing:border-box}
+
 body{
 font-family:Arial,sans-serif;
 margin:0;
@@ -15,24 +18,41 @@ color:#0f172a;
 .nav{
 background:#0f172a;
 color:white;
-padding:15px 30px;
+padding:18px 22px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-flex-wrap:wrap;
+position:sticky;
+top:0;
+z-index:100;
 }
 
-.nav a{
+.brand{
+font-weight:800;
+font-size:18px;
+}
+
+.nav-links a{
 color:white;
 text-decoration:none;
 margin-left:18px;
 font-size:14px;
+font-weight:600;
+}
+
+.menu-btn{
+display:none;
+background:none;
+border:none;
+color:white;
+font-size:28px;
+cursor:pointer;
 }
 
 .container{
 width:92%;
-max-width:1000px;
-margin:30px auto;
+max-width:1050px;
+margin:24px auto;
 }
 
 .back{
@@ -41,65 +61,120 @@ margin-bottom:18px;
 text-decoration:none;
 color:#2563eb;
 font-weight:bold;
+font-size:16px;
+}
+
+.image-box{
+position:relative;
+background:white;
+border-radius:18px;
+overflow:hidden;
+box-shadow:0 8px 24px rgba(0,0,0,0.10);
 }
 
 .main-image{
 width:100%;
-height:420px;
+height:480px;
 object-fit:cover;
-border-radius:14px;
+display:block;
 background:#ddd;
+}
+
+.slide-btn{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+background:rgba(15,23,42,0.75);
+color:white;
+border:none;
+width:42px;
+height:42px;
+border-radius:50%;
+font-size:24px;
+cursor:pointer;
+}
+
+.prev{
+left:14px;
+}
+
+.next{
+right:14px;
 }
 
 .gallery{
 display:flex;
 gap:10px;
-flex-wrap:wrap;
-margin-top:15px;
+overflow-x:auto;
+padding:14px 0;
 }
 
 .gallery img{
 width:110px;
-height:75px;
+height:78px;
 object-fit:cover;
-border-radius:8px;
+border-radius:10px;
 cursor:pointer;
+flex-shrink:0;
 }
 
 .card{
 background:white;
-padding:22px;
-border-radius:14px;
-box-shadow:0 6px 18px rgba(0,0,0,0.08);
-margin-top:22px;
+padding:24px;
+border-radius:18px;
+box-shadow:0 8px 24px rgba(0,0,0,0.10);
+margin-top:20px;
+}
+
+.card h1{
+font-size:32px;
+margin:0 0 10px;
+line-height:1.2;
 }
 
 .price{
-font-size:26px;
+font-size:28px;
 font-weight:bold;
 color:#2563eb;
-margin:10px 0;
+margin:12px 0;
 }
 
 .badge{
 display:inline-block;
 background:#e2e8f0;
-padding:5px 10px;
-border-radius:7px;
+padding:7px 11px;
+border-radius:999px;
 font-size:13px;
 margin-right:8px;
 margin-top:8px;
 }
 
+.description{
+font-size:17px;
+line-height:1.6;
+color:#334155;
+}
+
+.btn-row{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+margin-top:20px;
+}
+
 .btn{
 display:inline-block;
-margin-top:18px;
-padding:12px 16px;
+padding:14px 18px;
 background:#25D366;
 color:white;
 text-decoration:none;
-border-radius:8px;
+border-radius:10px;
 font-weight:bold;
+font-size:16px;
+}
+
+.map-btn{
+background:#2563eb;
 }
 
 .footer{
@@ -107,12 +182,115 @@ margin-top:50px;
 background:#0f172a;
 color:white;
 text-align:center;
-padding:25px;
+padding:28px;
 }
 
+.float-wa{
+position:fixed;
+bottom:22px;
+right:22px;
+background:#25D366;
+color:white;
+width:56px;
+height:56px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+text-decoration:none;
+font-size:25px;
+box-shadow:0 8px 20px rgba(0,0,0,0.25);
+z-index:200;
+}
+
+/* MOBILE */
 @media(max-width:700px){
+.nav{
+padding:18px 16px;
+}
+
+.brand{
+font-size:17px;
+}
+
+.menu-btn{
+display:block;
+}
+
+.nav-links{
+display:none;
+position:absolute;
+top:60px;
+left:0;
+right:0;
+background:#0f172a;
+padding:15px 20px;
+}
+
+.nav-links.show{
+display:block;
+}
+
+.nav-links a{
+display:block;
+margin:14px 0;
+font-size:17px;
+}
+
+.container{
+width:94%;
+margin:18px auto;
+}
+
+.back{
+font-size:17px;
+margin-bottom:14px;
+}
+
 .main-image{
-height:260px;
+height:330px;
+}
+
+.slide-btn{
+width:38px;
+height:38px;
+font-size:22px;
+}
+
+.gallery{
+padding:12px 0;
+}
+
+.gallery img{
+width:92px;
+height:68px;
+}
+
+.card{
+padding:20px;
+}
+
+.card h1{
+font-size:27px;
+}
+
+.price{
+font-size:24px;
+}
+
+.description{
+font-size:16px;
+}
+
+.btn{
+width:100%;
+text-align:center;
+font-size:17px;
+padding:15px;
+}
+
+.footer{
+padding-bottom:70px;
 }
 }
 </style>
@@ -121,9 +299,11 @@ height:260px;
 <body>
 
 <div class="nav">
-<div><strong>Muntaga Property Hub</strong></div>
+<div class="brand">Muntaga's Property Hub</div>
 
-<div>
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+<div class="nav-links" id="navLinks">
 <a href="/">Home</a>
 <a href="/about/">About</a>
 <a href="/contact/">Contact</a>
@@ -134,13 +314,22 @@ height:260px;
 
 <a href="/" class="back">← Back to All Listings</a>
 
+<div class="image-box">
 {% if apartment.image %}
 <img src="{{ apartment.image.url }}" class="main-image" id="mainImage">
 {% endif %}
 
-<div class="gallery">
+<button class="slide-btn prev" onclick="previousImage()">‹</button>
+<button class="slide-btn next" onclick="nextImage()">›</button>
+</div>
+
+<div class="gallery" id="gallery">
+{% if apartment.image %}
+<img src="{{ apartment.image.url }}" onclick="setImage(0)">
+{% endif %}
+
 {% for img in apartment.images.all %}
-<img src="{{ img.image.url }}" onclick="changeImage(this.src)">
+<img src="{{ img.image.url }}" onclick="setImage({{ forloop.counter }})">
 {% endfor %}
 </div>
 
@@ -150,11 +339,7 @@ height:260px;
 
 <p class="price">
 {{ apartment.price }} {{ apartment.currency }}
-{% if apartment.price_type == "day" %}
- / day
-{% else %}
- / month
-{% endif %}
+{% if apartment.price_type == "day" %}/ day{% else %}/ month{% endif %}
 </p>
 
 <p>
@@ -165,26 +350,78 @@ height:260px;
 
 <p><strong>Location:</strong> {{ apartment.location }}</p>
 
-<p>{{ apartment.description }}</p>
+<p class="description">{{ apartment.description }}</p>
 
+<div class="btn-row">
 <a class="btn"
 href="https://wa.me/{{ apartment.phone }}?text=Hello, I am interested in {{ apartment.title }} for {{ apartment.price }} {{ apartment.currency }}. Is it available?"
 target="_blank">
 Book on WhatsApp
 </a>
 
+{% if apartment.map_link %}
+<a class="btn map-btn" href="{{ apartment.map_link }}" target="_blank">
+View Location
+</a>
+{% endif %}
+</div>
+
 </div>
 
 </div>
 
 <div class="footer">
-<p>© Muntaga Property Hub</p>
+<p>© Muntaga's Property Hub</p>
 </div>
 
+<a href="https://wa.me/{{ apartment.phone }}" class="float-wa" target="_blank">💬</a>
+
 <script>
-function changeImage(src){
-document.getElementById("mainImage").src = src;
+function toggleMenu(){
+document.getElementById("navLinks").classList.toggle("show");
 }
+
+let images = [];
+let currentIndex = 0;
+
+window.onload = function(){
+const thumbs = document.querySelectorAll("#gallery img");
+thumbs.forEach(img => images.push(img.src));
+};
+
+function setImage(index){
+currentIndex = index;
+document.getElementById("mainImage").src = images[currentIndex];
+}
+
+function nextImage(){
+if(images.length === 0) return;
+currentIndex = (currentIndex + 1) % images.length;
+document.getElementById("mainImage").src = images[currentIndex];
+}
+
+function previousImage(){
+if(images.length === 0) return;
+currentIndex = (currentIndex - 1 + images.length) % images.length;
+document.getElementById("mainImage").src = images[currentIndex];
+}
+
+/* Swipe support */
+let startX = 0;
+
+document.getElementById("mainImage").addEventListener("touchstart", function(e){
+startX = e.touches[0].clientX;
+});
+
+document.getElementById("mainImage").addEventListener("touchend", function(e){
+let endX = e.changedTouches[0].clientX;
+if(startX - endX > 50){
+nextImage();
+}
+if(endX - startX > 50){
+previousImage();
+}
+});
 </script>
 
 </body>
