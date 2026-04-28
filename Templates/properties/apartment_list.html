@@ -50,7 +50,7 @@ font-size:30px;
 cursor:pointer;
 }
 
-/* HERO SLIDER */
+/* HERO */
 .hero-slider{
 position:relative;
 height:430px;
@@ -82,13 +82,14 @@ z-index:1;
 content:"";
 position:absolute;
 inset:0;
-background:linear-gradient(rgba(15,23,42,0.55),rgba(15,23,42,0.75));
+background:linear-gradient(rgba(15,23,42,0.45),rgba(15,23,42,0.78));
 }
 
 .slide-content{
 position:relative;
 z-index:2;
-max-width:850px;
+max-width:780px;
+padding:0 20px;
 }
 
 .slide-content .label{
@@ -102,13 +103,13 @@ margin-bottom:14px;
 }
 
 .slide-content h1{
-font-size:46px;
+font-size:40px;
 margin:0 0 12px;
-line-height:1.1;
+line-height:1.12;
 }
 
 .slide-content p{
-font-size:20px;
+font-size:19px;
 margin:0 0 22px;
 }
 
@@ -133,19 +134,21 @@ left:0;
 right:0;
 display:flex;
 justify-content:space-between;
-padding:0 18px;
+padding:0 22px;
 z-index:5;
 }
 
 .slider-arrows button{
-background:rgba(15,23,42,0.7);
-color:white;
+background:rgba(255,255,255,0.88);
+color:#0f172a;
 border:none;
-width:44px;
-height:44px;
+width:46px;
+height:46px;
 border-radius:50%;
-font-size:26px;
+font-size:28px;
+font-weight:bold;
 cursor:pointer;
+box-shadow:0 6px 16px rgba(0,0,0,0.25);
 }
 
 .dots{
@@ -171,13 +174,13 @@ cursor:pointer;
 background:white;
 }
 
-/* MAIN */
 .container{
 width:92%;
 max-width:1180px;
 margin:auto;
 }
 
+/* SEARCH */
 .filters{
 background:white;
 padding:22px;
@@ -186,10 +189,19 @@ margin-top:-35px;
 position:relative;
 z-index:10;
 box-shadow:0 12px 30px rgba(0,0,0,0.16);
-display:grid;
-grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;
-gap:14px;
 border:1px solid #e2e8f0;
+}
+
+.filter-grid{
+display:grid;
+grid-template-columns:1.5fr 1fr 1fr;
+gap:14px;
+margin-bottom:14px;
+}
+
+.filter-grid.second{
+grid-template-columns:1fr 1fr 1fr;
+margin-bottom:0;
 }
 
 .filters input,
@@ -217,9 +229,27 @@ font-size:15px;
 background:#1d4ed8;
 }
 
+.trust-row{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:12px;
+margin-top:24px;
+}
+
+.trust-card{
+background:white;
+padding:14px 16px;
+border-radius:14px;
+box-shadow:0 5px 16px rgba(0,0,0,0.08);
+font-weight:bold;
+font-size:14px;
+color:#334155;
+}
+
+/* SECTIONS */
 .section-title{
 font-size:32px;
-margin-top:48px;
+margin-top:52px;
 margin-bottom:6px;
 }
 
@@ -340,7 +370,7 @@ font-size:15px;
 
 .float-wa{
 position:fixed;
-bottom:22px;
+bottom:28px;
 right:22px;
 background:#25D366;
 color:white;
@@ -391,15 +421,15 @@ font-size:18px;
 }
 
 .hero-slider{
-height:420px;
+height:390px;
 }
 
 .slide-content h1{
-font-size:34px;
+font-size:31px;
 }
 
 .slide-content p{
-font-size:18px;
+font-size:17px;
 }
 
 .slider-arrows button{
@@ -409,9 +439,14 @@ font-size:24px;
 }
 
 .filters{
-grid-template-columns:1fr;
-margin-top:-28px;
+margin-top:-25px;
 padding:18px;
+}
+
+.filter-grid,
+.filter-grid.second{
+grid-template-columns:1fr;
+gap:12px;
 }
 
 .filters input,
@@ -419,6 +454,10 @@ padding:18px;
 .filters button{
 font-size:16px;
 padding:15px;
+}
+
+.trust-row{
+grid-template-columns:1fr;
 }
 
 .section-title{
@@ -431,16 +470,8 @@ grid-template-columns:1fr;
 gap:24px;
 }
 
-.card{
-border-radius:20px;
-}
-
 .card img{
 height:270px;
-}
-
-.card-body{
-padding:20px;
 }
 
 .card-body h3{
@@ -466,24 +497,6 @@ text-align:center;
 padding-bottom:78px;
 }
 }
-
-@media(max-width:430px){
-.hero-slider{
-height:390px;
-}
-
-.slide-content h1{
-font-size:31px;
-}
-
-.slide-content p{
-font-size:17px;
-}
-
-.card img{
-height:250px;
-}
-}
 </style>
 </head>
 
@@ -501,7 +514,6 @@ height:250px;
 </div>
 </div>
 
-<!-- HERO SLIDER -->
 <div class="hero-slider" id="heroSlider">
 
 {% for apartment in featured %}
@@ -521,7 +533,6 @@ height:250px;
 </div>
 {% endfor %}
 
-<!-- SPONSOR SLIDE -->
 <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1551434678-e076c223a692')">
     <div class="slide-content">
         <span class="label">Sponsored Placement</span>
@@ -543,6 +554,7 @@ height:250px;
 
 <form method="get" class="filters">
 
+<div class="filter-grid">
 <input type="text" name="q" placeholder="Search location" value="{{ query }}">
 
 <select name="furnished">
@@ -551,18 +563,25 @@ height:250px;
 <option value="unfurnished" {% if furnished == "unfurnished" %}selected{% endif %}>Unfurnished</option>
 </select>
 
-<input type="number" name="min" placeholder="Min Price" value="{{ min_price }}">
-
-<input type="number" name="max" placeholder="Max Price" value="{{ max_price }}">
-
 <select name="available">
 <option value="">Availability</option>
 <option value="yes" {% if available_only == "yes" %}selected{% endif %}>Available Only</option>
 </select>
+</div>
 
+<div class="filter-grid second">
+<input type="number" name="min" placeholder="Min Price" value="{{ min_price }}">
+<input type="number" name="max" placeholder="Max Price" value="{{ max_price }}">
 <button type="submit">Search</button>
+</div>
 
 </form>
+
+<div class="trust-row">
+<div class="trust-card">✅ Verified apartment listings</div>
+<div class="trust-card">💬 Fast WhatsApp response</div>
+<div class="trust-card">📍 Convenient locations</div>
+</div>
 
 <h2 class="section-title">Featured Properties</h2>
 <p class="section-subtitle">Highlighted listings selected for visibility and convenience.</p>
@@ -691,7 +710,6 @@ showSlide(prev);
 
 setInterval(nextSlide,5000);
 
-/* mobile swipe */
 let startX=0;
 let slider=document.getElementById("heroSlider");
 
