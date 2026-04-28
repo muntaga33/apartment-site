@@ -11,32 +11,33 @@
 body{
 font-family:Arial,sans-serif;
 margin:0;
-background:#f5f7fa;
+background:#f3f6fb;
 color:#0f172a;
 }
 
 .nav{
 background:#0f172a;
 color:white;
-padding:18px 22px;
+padding:18px 28px;
 display:flex;
 justify-content:space-between;
 align-items:center;
 position:sticky;
 top:0;
-z-index:100;
+z-index:1000;
+box-shadow:0 3px 10px rgba(0,0,0,0.15);
 }
 
 .brand{
 font-weight:800;
-font-size:18px;
+font-size:20px;
 }
 
 .nav-links a{
 color:white;
 text-decoration:none;
-margin-left:18px;
-font-size:14px;
+margin-left:22px;
+font-size:15px;
 font-weight:600;
 }
 
@@ -45,53 +46,157 @@ display:none;
 background:none;
 border:none;
 color:white;
-font-size:28px;
+font-size:30px;
 cursor:pointer;
 }
 
-.hero{
-padding:80px 22px;
-text-align:center;
-background:linear-gradient(rgba(15,23,42,0.65),rgba(15,23,42,0.65)),
-url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2');
+/* HERO SLIDER */
+.hero-slider{
+position:relative;
+height:430px;
+overflow:hidden;
+background:#0f172a;
+}
+
+.slide{
+position:absolute;
+inset:0;
+opacity:0;
+transition:opacity 0.8s ease;
 background-size:cover;
 background-position:center;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
 color:white;
+padding:30px;
 }
 
-.hero h1{
-font-size:38px;
+.slide.active{
+opacity:1;
+z-index:1;
+}
+
+.slide::before{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(rgba(15,23,42,0.55),rgba(15,23,42,0.75));
+}
+
+.slide-content{
+position:relative;
+z-index:2;
+max-width:850px;
+}
+
+.slide-content .label{
+display:inline-block;
+background:#2563eb;
+padding:7px 13px;
+border-radius:999px;
+font-size:13px;
+font-weight:bold;
+margin-bottom:14px;
+}
+
+.slide-content h1{
+font-size:46px;
 margin:0 0 12px;
+line-height:1.1;
 }
 
-.hero p{
-font-size:18px;
-margin:0;
+.slide-content p{
+font-size:20px;
+margin:0 0 22px;
 }
 
+.hero-btn{
+display:inline-block;
+padding:13px 20px;
+background:#25D366;
+color:white;
+border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+}
+
+.hero-btn.secondary{
+background:#2563eb;
+}
+
+.slider-arrows{
+position:absolute;
+top:50%;
+left:0;
+right:0;
+display:flex;
+justify-content:space-between;
+padding:0 18px;
+z-index:5;
+}
+
+.slider-arrows button{
+background:rgba(15,23,42,0.7);
+color:white;
+border:none;
+width:44px;
+height:44px;
+border-radius:50%;
+font-size:26px;
+cursor:pointer;
+}
+
+.dots{
+position:absolute;
+bottom:18px;
+left:0;
+right:0;
+text-align:center;
+z-index:5;
+}
+
+.dot{
+display:inline-block;
+width:10px;
+height:10px;
+background:rgba(255,255,255,0.55);
+border-radius:50%;
+margin:0 5px;
+cursor:pointer;
+}
+
+.dot.active{
+background:white;
+}
+
+/* MAIN */
 .container{
 width:92%;
-max-width:1200px;
+max-width:1180px;
 margin:auto;
 }
 
 .filters{
 background:white;
 padding:22px;
-border-radius:16px;
-margin-top:28px;
-box-shadow:0 8px 25px rgba(0,0,0,0.12);
+border-radius:18px;
+margin-top:-35px;
+position:relative;
+z-index:10;
+box-shadow:0 12px 30px rgba(0,0,0,0.16);
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;
 gap:14px;
 border:1px solid #e2e8f0;
 }
 
 .filters input,
 .filters select{
-padding:13px;
+padding:14px;
 border:1px solid #94a3b8;
-border-radius:10px;
+border-radius:12px;
 width:100%;
 font-size:15px;
 background:white;
@@ -101,23 +206,32 @@ background:white;
 background:#2563eb;
 color:white;
 border:none;
-padding:13px;
-border-radius:10px;
+padding:14px;
+border-radius:12px;
 cursor:pointer;
 font-weight:bold;
 font-size:15px;
 }
 
+.filters button:hover{
+background:#1d4ed8;
+}
+
 .section-title{
-font-size:30px;
-margin-top:40px;
-margin-bottom:20px;
+font-size:32px;
+margin-top:48px;
+margin-bottom:6px;
+}
+
+.section-subtitle{
+color:#64748b;
+margin-bottom:22px;
 }
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-gap:24px;
+grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+gap:26px;
 }
 
 .card-link{
@@ -128,30 +242,31 @@ display:block;
 
 .card{
 background:white;
-border-radius:18px;
+border-radius:20px;
 overflow:hidden;
-box-shadow:0 8px 24px rgba(0,0,0,0.10);
-transition:0.2s;
+box-shadow:0 10px 25px rgba(0,0,0,0.10);
+transition:0.25s ease;
 }
 
 .card:hover{
-transform:translateY(-4px);
+transform:translateY(-6px);
+box-shadow:0 16px 35px rgba(0,0,0,0.16);
 }
 
 .card img{
 width:100%;
-height:230px;
+height:240px;
 object-fit:cover;
 display:block;
 background:#e5e7eb;
 }
 
 .card-body{
-padding:18px;
+padding:20px;
 }
 
 .card-body h3{
-font-size:20px;
+font-size:21px;
 margin:0 0 10px;
 line-height:1.3;
 }
@@ -159,7 +274,7 @@ line-height:1.3;
 .price{
 font-weight:bold;
 color:#2563eb;
-font-size:18px;
+font-size:19px;
 margin:8px 0;
 }
 
@@ -171,11 +286,47 @@ font-size:15px;
 .badge{
 display:inline-block;
 background:#e2e8f0;
-padding:6px 10px;
+padding:7px 11px;
 border-radius:999px;
 font-size:12px;
 margin-right:6px;
 margin-top:8px;
+}
+
+.featured-badge{
+background:#fef3c7;
+color:#92400e;
+}
+
+.cta-strip{
+margin-top:55px;
+background:#0f172a;
+color:white;
+padding:35px;
+border-radius:22px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+}
+
+.cta-strip h2{
+margin:0 0 8px;
+}
+
+.cta-strip p{
+margin:0;
+color:#cbd5e1;
+}
+
+.cta-strip a{
+background:#25D366;
+color:white;
+text-decoration:none;
+padding:13px 20px;
+border-radius:10px;
+font-weight:bold;
+white-space:nowrap;
 }
 
 .footer{
@@ -183,7 +334,7 @@ margin-top:55px;
 background:#0f172a;
 color:white;
 text-align:center;
-padding:28px;
+padding:30px;
 font-size:15px;
 }
 
@@ -193,26 +344,26 @@ bottom:22px;
 right:22px;
 background:#25D366;
 color:white;
-width:56px;
-height:56px;
+width:58px;
+height:58px;
 display:flex;
 align-items:center;
 justify-content:center;
 border-radius:50%;
 text-decoration:none;
-font-size:25px;
+font-size:26px;
 box-shadow:0 8px 20px rgba(0,0,0,0.25);
-z-index:200;
+z-index:2000;
 }
 
 /* MOBILE */
-@media(max-width:700px){
+@media(max-width:800px){
 .nav{
-padding:18px 16px;
+padding:20px 18px;
 }
 
 .brand{
-font-size:17px;
+font-size:22px;
 }
 
 .menu-btn{
@@ -222,11 +373,11 @@ display:block;
 .nav-links{
 display:none;
 position:absolute;
-top:60px;
+top:68px;
 left:0;
 right:0;
 background:#0f172a;
-padding:15px 20px;
+padding:15px 22px;
 }
 
 .nav-links.show{
@@ -235,31 +386,32 @@ display:block;
 
 .nav-links a{
 display:block;
-margin:14px 0;
-font-size:17px;
+margin:16px 0;
+font-size:18px;
 }
 
-.hero{
-padding:75px 20px;
+.hero-slider{
+height:420px;
 }
 
-.hero h1{
-font-size:32px;
-line-height:1.2;
+.slide-content h1{
+font-size:34px;
 }
 
-.hero p{
-font-size:17px;
+.slide-content p{
+font-size:18px;
 }
 
-.container{
-width:92%;
+.slider-arrows button{
+width:40px;
+height:40px;
+font-size:24px;
 }
 
 .filters{
 grid-template-columns:1fr;
+margin-top:-28px;
 padding:18px;
-margin-top:22px;
 }
 
 .filters input,
@@ -270,42 +422,66 @@ padding:15px;
 }
 
 .section-title{
-font-size:28px;
-margin-top:34px;
+font-size:30px;
+margin-top:42px;
 }
 
 .grid{
 grid-template-columns:1fr;
-gap:22px;
+gap:24px;
 }
 
 .card{
-border-radius:18px;
+border-radius:20px;
 }
 
 .card img{
-height:260px;
+height:270px;
 }
 
 .card-body{
-padding:18px;
+padding:20px;
 }
 
 .card-body h3{
-font-size:21px;
+font-size:22px;
 }
 
 .price{
-font-size:19px;
+font-size:20px;
 }
 
-.location{
-font-size:16px;
+.cta-strip{
+flex-direction:column;
+align-items:flex-start;
+padding:28px;
+}
+
+.cta-strip a{
+width:100%;
+text-align:center;
 }
 
 .footer{
-font-size:15px;
-padding-bottom:70px;
+padding-bottom:78px;
+}
+}
+
+@media(max-width:430px){
+.hero-slider{
+height:390px;
+}
+
+.slide-content h1{
+font-size:31px;
+}
+
+.slide-content p{
+font-size:17px;
+}
+
+.card img{
+height:250px;
 }
 }
 </style>
@@ -325,9 +501,42 @@ padding-bottom:70px;
 </div>
 </div>
 
-<div class="hero">
-<h1>Find Your Perfect Apartment</h1>
-<p>Quality apartments in Senegambia and beyond</p>
+<!-- HERO SLIDER -->
+<div class="hero-slider" id="heroSlider">
+
+{% for apartment in featured %}
+<div class="slide {% if forloop.first %}active{% endif %}"
+     style="background-image:url('{% if apartment.image %}{{ apartment.image.url }}{% else %}https://images.unsplash.com/photo-1560448204-e02f11c3d0e2{% endif %}')">
+
+    <div class="slide-content">
+        <span class="label">Featured Property</span>
+        <h1>{{ apartment.title }}</h1>
+        <p>
+            {{ apartment.price }} {{ apartment.currency }}
+            {% if apartment.price_type == "day" %}/ day{% else %}/ month{% endif %}
+            · {{ apartment.location }}
+        </p>
+        <a class="hero-btn" href="{% url 'apartment_detail' apartment.id %}">View Property</a>
+    </div>
+</div>
+{% endfor %}
+
+<!-- SPONSOR SLIDE -->
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1551434678-e076c223a692')">
+    <div class="slide-content">
+        <span class="label">Sponsored Placement</span>
+        <h1>Advertise With Muntaga's Property Hub</h1>
+        <p>Promote your brand to property seekers, tenants, landlords, and investors.</p>
+        <a class="hero-btn secondary" href="/contact/">Sponsor This Space</a>
+    </div>
+</div>
+
+<div class="slider-arrows">
+<button onclick="prevSlide()">‹</button>
+<button onclick="nextSlide()">›</button>
+</div>
+
+<div class="dots" id="dots"></div>
 </div>
 
 <div class="container">
@@ -356,6 +565,7 @@ padding-bottom:70px;
 </form>
 
 <h2 class="section-title">Featured Properties</h2>
+<p class="section-subtitle">Highlighted listings selected for visibility and convenience.</p>
 
 <div class="grid">
 {% for apartment in featured %}
@@ -369,6 +579,7 @@ padding-bottom:70px;
 {% endif %}
 
 <div class="card-body">
+<span class="badge featured-badge">Featured</span>
 <h3>{{ apartment.title }}</h3>
 
 <p class="price">
@@ -390,6 +601,7 @@ padding-bottom:70px;
 </div>
 
 <h2 class="section-title">All Properties</h2>
+<p class="section-subtitle">Browse all available apartment listings.</p>
 
 <div class="grid">
 {% for apartment in apartments %}
@@ -423,6 +635,14 @@ padding-bottom:70px;
 {% endfor %}
 </div>
 
+<div class="cta-strip">
+<div>
+<h2>Need help finding a place?</h2>
+<p>Send a quick WhatsApp message and we’ll help you find the right apartment.</p>
+</div>
+<a href="https://wa.me/2207799703" target="_blank">Chat on WhatsApp</a>
+</div>
+
 </div>
 
 <div class="footer">
@@ -436,6 +656,54 @@ padding-bottom:70px;
 function toggleMenu(){
 document.getElementById("navLinks").classList.toggle("show");
 }
+
+let slides = document.querySelectorAll(".slide");
+let currentSlide = 0;
+let dotsContainer = document.getElementById("dots");
+
+slides.forEach((slide,index)=>{
+let dot=document.createElement("span");
+dot.className="dot";
+if(index===0){dot.classList.add("active")}
+dot.onclick=()=>showSlide(index);
+dotsContainer.appendChild(dot);
+});
+
+function showSlide(index){
+slides[currentSlide].classList.remove("active");
+document.querySelectorAll(".dot")[currentSlide].classList.remove("active");
+
+currentSlide=index;
+
+slides[currentSlide].classList.add("active");
+document.querySelectorAll(".dot")[currentSlide].classList.add("active");
+}
+
+function nextSlide(){
+let next=(currentSlide+1)%slides.length;
+showSlide(next);
+}
+
+function prevSlide(){
+let prev=(currentSlide-1+slides.length)%slides.length;
+showSlide(prev);
+}
+
+setInterval(nextSlide,5000);
+
+/* mobile swipe */
+let startX=0;
+let slider=document.getElementById("heroSlider");
+
+slider.addEventListener("touchstart",function(e){
+startX=e.touches[0].clientX;
+});
+
+slider.addEventListener("touchend",function(e){
+let endX=e.changedTouches[0].clientX;
+if(startX-endX>50){nextSlide();}
+if(endX-startX>50){prevSlide();}
+});
 </script>
 
 </body>
